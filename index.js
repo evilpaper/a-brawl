@@ -17,7 +17,9 @@ let html = "";
 const playingDeck = [...deck];
 
 const brawl = {
-  deck: [...deck],
+  drawPile: [...deck],
+  discardPile: [],
+  currentRound: [],
   life: 21,
   currentBrawlerStrength: 0,
   strengthOfLastBeatenOpponent: 0,
