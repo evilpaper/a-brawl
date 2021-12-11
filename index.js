@@ -20,8 +20,9 @@ let html = "";
 const deck = shuffle([...PLAYING_CARDS]);
 const round = drawCards(deck, 4);
 
-const initialValues = {
+const store = {
   drawPile: [...deck],
+  round: [...drawCards(deck, 4)],
   discardPile: [],
   currentRound: [],
   life: 21,
@@ -41,4 +42,5 @@ app.innerHTML = html;
 
 app.addEventListener("click", (e) => {
   console.log(e.target.closest("button"));
+  const card = e.target.closest("button");
 });
