@@ -1,22 +1,26 @@
-import { deck } from "./deck.js";
+import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
+
+const app = document.querySelector("#root");
 
 function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
   }
+  return shuffledArray;
 }
 
 function drawCards(deck, numberOfCards) {
   return [...deck.slice(0, numberOfCards)];
 }
 
-const app = document.querySelector("#root");
 let html = "";
 
-const playingDeck = [...deck];
+const deck = shuffle([...PLAYING_CARDS]);
+const round = drawCards(deck, 4);
 
-const brawl = {
+const initialValues = {
   drawPile: [...deck],
   discardPile: [],
   currentRound: [],
@@ -25,16 +29,16 @@ const brawl = {
   strengthOfLastBeatenOpponent: 0,
 };
 
-shuffle(playingDeck);
-
-const round = drawCards(playingDeck, 4);
-
 for (const card of round) {
-  html += `<div class="card">
+  html += `<button class="card" data-card="${card.suite}${card.rank}">
 			  <div class="upperleft">${card.suite}</div>
 			  <div>${card.rank}</div>
 			  <div class="lowerright">${card.suite}</div>
-		</div>`;
+		</button>`;
 }
 
 app.innerHTML = html;
+
+app.addEventListener("click", (e) => {
+  console.log(e.target.closest("button"));
+});
