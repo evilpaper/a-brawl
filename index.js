@@ -15,7 +15,16 @@ const app = document.querySelector("#root");
 let html = "";
 
 const playingDeck = [...deck];
+
+const brawl = {
+  deck: [...deck],
+  life: 21,
+  currentBrawlerStrength: 0,
+  strengthOfLastBeatenOpponent: 0,
+};
+
 shuffle(playingDeck);
+
 const round = drawCards(playingDeck, 4);
 
 for (const card of round) {
