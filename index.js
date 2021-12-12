@@ -18,7 +18,6 @@ function drawCards(deck, numberOfCards) {
 let html = "";
 
 const deck = shuffle([...PLAYING_CARDS]);
-const round = drawCards(deck, 4);
 
 const store = {
   drawPile: [...deck],
