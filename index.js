@@ -30,17 +30,28 @@ const store = {
   strengthOfLastBeatenOpponent: 0,
 };
 
-for (const card of round) {
-  html += `<button class="card" data-card="${card.suite}${card.rank}">
-			  <div class="upperleft">${card.suite}</div>
-			  <div>${card.rank}</div>
-			  <div class="lowerright">${card.suite}</div>
-		</button>`;
+function drawGame(store) {
+  html = "";
+  app.innerHTML = "";
+
+  for (const card of store.round) {
+    html += `<button class="card" data-card="${card.suite}${card.rank}">
+          <div class="upperleft">${card.suite}</div>
+          <div>${card.rank}</div>
+          <div class="lowerright">${card.suite}</div>
+      </button>`;
+  }
+  app.innerHTML = html;
 }
 
-app.innerHTML = html;
+function updateStore(action) {
+  const updatedStore = { ...store, round: [...store.round.slice(0, 3)] };
+  return updatedStore;
+}
 
 app.addEventListener("click", (e) => {
-  console.log(e.target.closest("button"));
   const card = e.target.closest("button");
+  drawGame(updateStore(card));
 });
+
+drawGame(store);
