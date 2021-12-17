@@ -45,6 +45,16 @@ function drawGame(store) {
 
 function updateStore(action) {
   const updatedStore = { ...store, round: [...store.round.slice(0, 3)] };
+  switch (action) {
+    case "card":
+      // update state
+      break;
+    case "forward":
+      // update state
+      break;
+    default:
+      console.log("I am default");
+  }
   return updatedStore;
 }
 
