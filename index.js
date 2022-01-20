@@ -34,7 +34,7 @@ function drawGame(store) {
   app.innerHTML = "";
 
   for (const card of store.round) {
-    html += `<button class="card" data-card="${card.suite}${card.rank}">
+    html += `<button class="card" data-suite="${card.suite}" data-rank="${card.rank}">
           <div class="upperleft">${card.suite}</div>
           <div>${card.rank}</div>
           <div class="lowerright">${card.suite}</div>
@@ -44,7 +44,7 @@ function drawGame(store) {
 }
 
 function updateStore(action) {
-  const updatedStore = { ...store, round: [...store.round.slice(0, 3)] };
+  const updatedStore = { ...store, round: [...store.round] };
   switch (action) {
     case "card":
       // update state
@@ -53,7 +53,8 @@ function updateStore(action) {
       // update state
       break;
     default:
-      console.log("I am default");
+      console.log("Suite: ", action.dataset.suite);
+      console.log("Rank: ", action.dataset.rank);
   }
   return updatedStore;
 }
