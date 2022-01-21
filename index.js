@@ -2,6 +2,12 @@ import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
 
+function prepareDeck(array) {
+  return array.map((item) => {
+    return { ...item, played: "false" };
+  });
+}
+
 function shuffle(array) {
   const shuffledArray = [...array];
   for (let i = shuffledArray.length - 1; i > 0; i--) {
@@ -17,7 +23,8 @@ function drawCards(deck, numberOfCards) {
 
 let html = "";
 
-const deck = shuffle([...PLAYING_CARDS]);
+const playableDeck = prepareDeck(PLAYING_CARDS);
+const deck = shuffle([...playableDeck]);
 
 const store = {
   drawPile: [...deck],

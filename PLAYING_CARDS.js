@@ -2,22 +2,27 @@ export const PLAYING_CARDS = [
   {
     suite: "♣",
     rank: 1,
+    played: false,
   },
   {
     suite: "♣",
     rank: 2,
+    played: false,
   },
   {
     suite: "♣",
     rank: 3,
+    played: false,
   },
   {
     suite: "♣",
     rank: 4,
+    played: false,
   },
   {
     suite: "♣",
     rank: 5,
+    played: false,
   },
   {
     suite: "♣",
