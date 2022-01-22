@@ -41,9 +41,12 @@ function drawGame(store) {
   app.innerHTML = "";
 
   for (const card of store.round) {
-    html += `<button class="card ${card.played ? "played" : ""}" data-card="${
-      card.suite + card.rank.toString()
-    }" data-suite="${card.suite}" data-rank="${card.rank}">
+    html += `<button 
+        class="card ${card.played ? "played" : ""}" 
+        data-card="${card.suite + card.rank.toString()}" 
+        data-suite="${card.suite}" data-rank="${card.rank}"
+        ${card.played ? "disabled" : ""}
+        >
           <div class="upperleft">${card.suite}</div>
           <div>${card.rank}</div>
           <div class="lowerright">${card.suite}</div>
