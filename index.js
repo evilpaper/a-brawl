@@ -26,7 +26,7 @@ let html = "";
 const playableDeck = prepareDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
-const store = {
+let store = {
   drawPile: [...deck],
   round: [...drawCards(deck, 4)],
   discardPile: [],
@@ -92,7 +92,8 @@ function updateStore(action) {
 
 app.addEventListener("click", (e) => {
   const card = e.target.closest("button");
-  drawGame(updateStore(card));
+  store = updateStore(card);
+  drawGame(store);
 });
 
 drawGame(store);
