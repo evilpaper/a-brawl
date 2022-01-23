@@ -15,6 +15,7 @@
       #root {
         display: flex;
       }
+
       .card {
         padding: 0.4rem;
         margin: 0.4rem;
@@ -28,10 +29,14 @@
         min-height: 5.8rem;
         cursor: pointer;
       }
-      .card:hover,
-      .card:focus {
+      .card:focus,
+      .card:hover {
         background-color: black;
         color: white;
+      }
+      .card[disabled] {
+        pointer-events: none;
+        opacity: 0.5;
       }
       .upperleft {
         display: flex;
