@@ -1,231 +1,282 @@
 export const PLAYING_CARDS = [
   {
     suite: "♣",
-    rank: 1,
-    played: false,
+    rank: "1",
+    value: 1,
   },
   {
     suite: "♣",
-    rank: 2,
-    played: false,
+    rank: "2",
+    value: 2,
   },
   {
     suite: "♣",
-    rank: 3,
-    played: false,
+    rank: "3",
+    value: 3,
   },
   {
     suite: "♣",
-    rank: 4,
-    played: false,
+    rank: "4",
+    value: 4,
   },
   {
     suite: "♣",
-    rank: 5,
-    played: false,
+    rank: "5",
+    value: 5,
   },
   {
     suite: "♣",
-    rank: 6,
+    rank: "6",
+    value: 6,
   },
   {
     suite: "♣",
-    rank: 7,
+    rank: "7",
+    value: 7,
   },
   {
     suite: "♣",
-    rank: 8,
+    rank: "8",
+    value: 8,
   },
   {
     suite: "♣",
-    rank: 9,
+    rank: "9",
+    value: 9,
   },
   {
     suite: "♣",
-    rank: 10,
+    rank: "10",
+    value: 10,
   },
   {
     suite: "♣",
-    rank: "Knight",
+    rank: "J",
+    value: 11,
   },
   {
     suite: "♣",
-    rank: "Queen",
+    rank: "Q",
+    value: 13,
   },
   {
     suite: "♣",
-    rank: "King",
+    rank: "K",
+    value: 15,
   },
   {
     suite: "♣",
+    rank: "A",
+    value: 17,
+  },
+  {
+    suite: "♦",
+    rank: "1",
+    value: 1,
+  },
+  {
+    suite: "♦",
+    rank: "2",
+    value: 2,
+  },
+  {
+    suite: "♦",
+    rank: "3",
+    value: 3,
+  },
+  {
+    suite: "♦",
+    rank: "4",
+    value: 4,
+  },
+  {
+    suite: "♦",
+    rank: "5",
+    value: 5,
+  },
+  {
+    suite: "♦",
+    rank: "6",
+    value: 6,
+  },
+  {
+    suite: "♦",
+    rank: "7",
+    value: 7,
+  },
+  {
+    suite: "♦",
+    rank: "8",
+    value: 8,
+  },
+  {
+    suite: "♦",
+    rank: "9",
+    value: 9,
+  },
+  {
+    suite: "♦",
+    rank: "10",
+    value: 10,
+  },
+  {
+    suite: "♦",
+    rank: "J",
+    value: 11,
+  },
+  {
+    suite: "♦",
+    rank: "Q",
+    value: 11,
+  },
+  {
+    suite: "♦",
+    rank: "K",
+    value: 11,
+  },
+  {
+    suite: "♦",
+    rank: "A",
+    value: 11,
+  },
+  {
+    suite: "♥",
+    rank: "1",
+    value: 1,
+  },
+  {
+    suite: "♥",
+    rank: "2",
+    value: 2,
+  },
+  {
+    suite: "♥",
+    rank: "3",
+    value: 3,
+  },
+  {
+    suite: "♥",
+    rank: "4",
+    value: 4,
+  },
+  {
+    suite: "♥",
+    rank: "5",
+    value: 5,
+  },
+  {
+    suite: "♥",
+    rank: "6",
+    value: 6,
+  },
+  {
+    suite: "♥",
+    rank: "7",
+    value: 7,
+  },
+  {
+    suite: "♥",
+    rank: "8",
+    value: 8,
+  },
+  {
+    suite: "♥",
+    rank: "9",
+    value: 9,
+  },
+  {
+    suite: "♥",
+    rank: "10",
+    value: 10,
+  },
+  {
+    suite: "♥",
+    rank: "J",
+    value: 11,
+  },
+  {
+    suite: "♥",
+    rank: "Q",
+    value: 11,
+  },
+  {
+    suite: "♥",
+    rank: "K",
+    value: 11,
+  },
+  {
+    suite: "♥",
+    rank: "A",
+    value: 11,
+  },
+  {
+    suite: "♠",
+    rank: "1",
+    value: 1,
+  },
+  {
+    suite: "♠",
+    rank: "2",
+    value: 2,
+  },
+  {
+    suite: "♠",
+    rank: "3",
+    value: 3,
+  },
+  {
+    suite: "♠",
+    rank: "4",
+    value: 4,
+  },
+  {
+    suite: "♠",
+    rank: "5",
+    value: 5,
+  },
+  {
+    suite: "♠",
+    rank: "6",
+    value: 6,
+  },
+  {
+    suite: "♠",
+    rank: "7",
+    value: 7,
+  },
+  {
+    suite: "♣",
+    rank: "8",
+    value: 8,
+  },
+  {
+    suite: "♠",
+    rank: "9",
+    value: 9,
+  },
+  {
+    suite: "♠",
+    rank: "10",
+    value: 10,
+  },
+  {
+    suite: "♠",
+    rank: "J",
+    Value: 11,
+  },
+  {
+    suite: "♠",
+    rank: "Q",
+    value: 13,
+  },
+  {
+    suite: "♠",
+    rank: "K",
+    value: 15,
+  },
+  {
+    suite: "♠",
     rank: "Ace",
-  },
-  {
-    suite: "♦",
-    rank: 1,
-  },
-  {
-    suite: "♦",
-    rank: 2,
-  },
-  {
-    suite: "♦",
-    rank: 3,
-  },
-  {
-    suite: "♦",
-    rank: 4,
-  },
-  {
-    suite: "♦",
-    rank: 5,
-  },
-  {
-    suite: "♦",
-    rank: 6,
-  },
-  {
-    suite: "♦",
-    rank: 7,
-  },
-  {
-    suite: "♦",
-    rank: 8,
-  },
-  {
-    suite: "♦",
-    rank: 9,
-  },
-  {
-    suite: "♦",
-    rank: 10,
-  },
-  {
-    suite: "♦",
-    rank: "Knight",
-  },
-  {
-    suite: "♦",
-    rank: "Queen",
-  },
-  {
-    suite: "♦",
-    rank: "King",
-  },
-  {
-    suite: "♦",
-    rank: "Ace",
-  },
-  {
-    suite: "♥",
-    rank: 1,
-  },
-  {
-    suite: "♥",
-    rank: 2,
-  },
-  {
-    suite: "♥",
-    rank: 3,
-  },
-  {
-    suite: "♥",
-    rank: 4,
-  },
-  {
-    suite: "♥",
-    rank: 5,
-  },
-  {
-    suite: "♥",
-    rank: 6,
-  },
-  {
-    suite: "♥",
-    rank: 7,
-  },
-  {
-    suite: "♥",
-    rank: 8,
-  },
-  {
-    suite: "♥",
-    rank: 9,
-  },
-  {
-    suite: "♥",
-    rank: 10,
-  },
-  {
-    suite: "♥",
-    rank: "Knight",
-  },
-  {
-    suite: "♥",
-    rank: "Queen",
-  },
-  {
-    suite: "♥",
-    rank: "King",
-  },
-  {
-    suite: "♥",
-    rank: "Ace",
-  },
-  {
-    suite: "♠",
-    rank: 1,
-  },
-  {
-    suite: "♠",
-    rank: 2,
-  },
-  {
-    suite: "♠",
-    rank: 3,
-  },
-  {
-    suite: "♠",
-    rank: 4,
-  },
-  {
-    suite: "♠",
-    rank: 5,
-  },
-  {
-    suite: "♠",
-    rank: 6,
-  },
-  {
-    suite: "♠",
-    rank: 7,
-  },
-  {
-    suite: "♣",
-    rank: 8,
-  },
-  {
-    suite: "♠",
-    rank: 9,
-  },
-  {
-    suite: "♠",
-    rank: 10,
-  },
-  {
-    suite: "♠",
-    rank: "Knight",
-  },
-  {
-    suite: "♠",
-    rank: "Queen",
-  },
-  {
-    suite: "♠",
-    rank: "King",
-  },
-  {
-    suite: "♠",
-    rank: "Ace",
+    value: 17,
   },
 ];

@@ -31,8 +31,6 @@ let store = {
   health: 21,
   defence: 0,
   attack: 0,
-  currentBrawlerStrength: 0,
-  strengthOfLastBeatenOpponent: 0,
 };
 
 function drawGame(store) {
@@ -48,7 +46,7 @@ function drawGame(store) {
   for (const card of store.round) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
-        data-card="${card.suite + card.rank.toString()}" 
+        data-card="${card.suite + card.rank}" 
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
         >
@@ -67,26 +65,29 @@ function updateStore(action) {
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
     return (
-      card.suite === action.dataset.suite &&
-      card.rank.toString() === action.dataset.rank
+      card.suite === action.dataset.suite && card.rank === action.dataset.rank
     );
   });
   // Get the index of the selected card
   const indexOfSelectedCard = store.round.findIndex(
     (card) =>
-      card.suite === action.dataset.suite &&
-      card.rank.toString() === action.dataset.rank
+      card.suite === action.dataset.suite && card.rank === action.dataset.rank
   );
-  // Create a copy of the card in the current round
+  // Create a copy of the current round
   const updatedRound = [...store.round];
   // Set played = true for the selected card in the current round
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
   // Update the store
   const updatedStore = { ...store, round: updatedRound };
+
   switch (action) {
-    case "card":
-      // find card
-      // set boolean played to true on found card
+    case "♣":
+      break;
+    case "♠":
+      break;
+    case "♥":
+      break;
+    case "♦":
       // update state
       break;
     case "forward":
