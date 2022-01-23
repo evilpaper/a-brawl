@@ -21,8 +21,6 @@ function drawCards(deck, numberOfCards) {
   return [...deck.slice(0, numberOfCards)];
 }
 
-let html = "";
-
 const playableDeck = prepareDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
@@ -30,18 +28,25 @@ let store = {
   drawPile: [...deck],
   round: [...drawCards(deck, 4)],
   discardPile: [],
-  currentRound: [],
-  life: 21,
+  health: 21,
+  defence: 0,
+  attack: 0,
   currentBrawlerStrength: 0,
   strengthOfLastBeatenOpponent: 0,
 };
 
 function drawGame(store) {
-  html = "";
+  let scoreboard = "";
+  let cards = "";
   app.innerHTML = "";
+  scoreboard = `
+    <p>Health: ${store.health}</p>
+    <p>Defence: ${store.defence}</p>
+    <p>Attack: ${store.attack}</p>
+  `;
 
   for (const card of store.round) {
-    html += `<button 
+    cards += `<button 
         class="card ${card.played ? "played" : ""}" 
         data-card="${card.suite + card.rank.toString()}" 
         data-suite="${card.suite}" data-rank="${card.rank}"
@@ -52,11 +57,13 @@ function drawGame(store) {
           <div class="lowerright">${card.suite}</div>
       </button>`;
   }
-  app.innerHTML = html;
+
+  const cardHTML = `<section class="round" section>${cards}</section>`;
+
+  app.innerHTML = scoreboard + cardHTML;
 }
 
 function updateStore(action) {
-  console.log(store);
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
     return (
@@ -76,7 +83,6 @@ function updateStore(action) {
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
   // Update the store
   const updatedStore = { ...store, round: updatedRound };
-  console.log(updatedStore);
   switch (action) {
     case "card":
       // find card
