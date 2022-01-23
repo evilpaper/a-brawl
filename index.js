@@ -50,7 +50,6 @@ function drawGame(store) {
         data-card="${card.suite + card.rank}" 
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
-        data-action="${card.suite}"
         >
           <div class="upperleft">${card.suite}</div>
           <div>${card.rank}</div>
@@ -79,28 +78,37 @@ function updateStore(action) {
   const updatedRound = [...store.round];
   // Set played = true for the selected card in the current round
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
-  // Update the store
-  const updatedStore = { ...store, round: updatedRound };
-
-  console.log(action);
-
-  switch (action.dataset.action) {
+  const damage =
+    selectedCard.value > store.defence ? selectedCard.value - store.defence : 0;
+  switch (action.dataset.suite) {
     case "♣":
-      console.log("Hello");
-      break;
+      return {
+        ...store,
+        health: store.health - damage,
+        attack: selectedCard.value - 1,
+        round: updatedRound,
+      };
     case "♠":
-      break;
+      return {
+        ...store,
+        health: store.health - damage,
+        attack: selectedCard.value - 1,
+        round: updatedRound,
+      };
     case "♥":
-      break;
+      return {
+        ...store,
+        health: store.health + selectedCard.value,
+      };
     case "♦":
-      // update state
-      break;
-    case "dodge":
-      // update state
-      break;
+      return {
+        ...store,
+        defence: selectedCard.value,
+        attack: selectedCard.value,
+        round: updatedRound,
+      };
     default:
-    // console.log("Suite: ", action.dataset.suite);
-    // console.log("Rank: ", action.dataset.rank);
+      return store;
   }
   return updatedStore;
 }
