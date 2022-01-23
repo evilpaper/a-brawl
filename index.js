@@ -37,6 +37,7 @@ function drawGame(store) {
   let scoreboard = "";
   let cards = "";
   app.innerHTML = "";
+
   scoreboard = `
     <p>Health: ${store.health}</p>
     <p>Defence: ${store.defence}</p>
@@ -49,6 +50,7 @@ function drawGame(store) {
         data-card="${card.suite + card.rank}" 
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
+        data-action="${card.suite}"
         >
           <div class="upperleft">${card.suite}</div>
           <div>${card.rank}</div>
@@ -80,8 +82,11 @@ function updateStore(action) {
   // Update the store
   const updatedStore = { ...store, round: updatedRound };
 
-  switch (action) {
+  console.log(action);
+
+  switch (action.dataset.action) {
     case "♣":
+      console.log("Hello");
       break;
     case "♠":
       break;
@@ -90,7 +95,7 @@ function updateStore(action) {
     case "♦":
       // update state
       break;
-    case "forward":
+    case "dodge":
       // update state
       break;
     default:
@@ -102,8 +107,10 @@ function updateStore(action) {
 
 app.addEventListener("click", (e) => {
   const card = e.target.closest("button");
-  store = updateStore(card);
-  drawGame(store);
+  if (card) {
+    store = updateStore(card);
+    drawGame(store);
+  }
 });
 
 drawGame(store);
