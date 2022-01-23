@@ -52,7 +52,7 @@ function drawGame(store) {
         ${card.played ? "disabled" : ""}
         >
           <div class="upperleft">${card.suite}</div>
-          <div>${card.rank}</div>
+          <div>${card.rank} ${card.value > 10 ? card.value : ""}</div>
           <div class="lowerright">${card.suite}</div>
       </button>`;
   }
@@ -78,8 +78,10 @@ function updateStore(action) {
   const updatedRound = [...store.round];
   // Set played = true for the selected card in the current round
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
+  // Not supernice
   const damage =
     selectedCard.value > store.defence ? selectedCard.value - store.defence : 0;
+
   switch (action.dataset.suite) {
     case "♣":
       return {
