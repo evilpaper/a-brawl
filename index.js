@@ -78,10 +78,19 @@ function updateStore(action) {
       card.suite === action.dataset.suite && card.rank === action.dataset.rank
   );
   // Create a copy of the current round
-  let updatedRound = [...store.round];
+  // let updatedRound = [...store.round];
   let updatedDrawpile = [...store.drawPile];
   // Set played = true for the selected card in the current round
-  updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
+  // updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
+
+  const updatedRound = store.round.map((card, index) => {
+    if (index === indexOfSelectedCard) {
+      return { ...card, played: true };
+    } else {
+      return { ...card };
+    }
+  });
+
   // Not supernice
   const damage =
     selectedCard.value > store.strength
