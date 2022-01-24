@@ -30,12 +30,10 @@ const initialRound = [...drawCards(initialDrawPile, 4)];
 
 let store = {
   drawPile: [...initialDrawPile],
-  discardPile: [],
   round: [...initialRound],
-  discardPile: [],
   health: 21,
-  defence: 0,
-  attack: 0,
+  strength: 0,
+  durability: 0,
 };
 
 function drawGame(store) {
@@ -45,8 +43,8 @@ function drawGame(store) {
 
   scoreboard = `
     <p>Health: ${store.health}</p>
-    <p>Attack: ${store.defence}</p>
-    <p>Durability: ${store.attack}</p>
+    <p>Strength: ${store.strength}</p>
+    <p>Durability: ${store.durability}</p>
   `;
 
   for (const card of store.round) {
@@ -86,7 +84,9 @@ function updateStore(action) {
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
   // Not supernice
   const damage =
-    selectedCard.value > store.defence ? selectedCard.value - store.defence : 0;
+    selectedCard.value > store.strength
+      ? selectedCard.value - store.strength
+      : 0;
 
   const allCardsInRoundPlayed =
     updatedRound.filter((card) => {
@@ -106,7 +106,7 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        attack: selectedCard.value - 1,
+        durability: selectedCard.value - 1,
         round: updatedRound,
       };
     case "♠":
@@ -114,7 +114,7 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        attack: selectedCard.value - 1,
+        durability: selectedCard.value - 1,
         round: updatedRound,
       };
     case "♥":
@@ -131,8 +131,8 @@ function updateStore(action) {
       return {
         ...store,
         drawPile: updatedDrawpile,
-        defence: selectedCard.value,
-        attack: "Shining new",
+        strength: selectedCard.value,
+        durability: "Shining new",
         round: updatedRound,
       };
     default:
