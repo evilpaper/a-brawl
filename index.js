@@ -45,8 +45,8 @@ function drawGame(store) {
 
   scoreboard = `
     <p>Health: ${store.health}</p>
-    <p>Defence: ${store.defence}</p>
-    <p>Attack: ${store.attack}</p>
+    <p>Attack: ${store.defence}</p>
+    <p>Durability: ${store.attack}</p>
   `;
 
   for (const card of store.round) {
@@ -81,6 +81,7 @@ function updateStore(action) {
   );
   // Create a copy of the current round
   let updatedRound = [...store.round];
+  let updatedDrawpile = [...store.drawPile];
   // Set played = true for the selected card in the current round
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
   // Not supernice
@@ -93,13 +94,17 @@ function updateStore(action) {
     }).length === CARD_IN_ROUND;
 
   if (allCardsInRoundPlayed) {
+    // Pick first 4 cards from draw pile
     updatedRound = [...drawCards(store.drawPile, 4)];
+    updatedDrawpile = [...store.drawPile.slice(4)];
+    console.log("Cards in drawPile ", updatedDrawpile.length);
   }
 
   switch (action.dataset.suite) {
     case "♣":
       return {
         ...store,
+        drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
         attack: selectedCard.value - 1,
         round: updatedRound,
@@ -107,6 +112,7 @@ function updateStore(action) {
     case "♠":
       return {
         ...store,
+        drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
         attack: selectedCard.value - 1,
         round: updatedRound,
@@ -114,6 +120,7 @@ function updateStore(action) {
     case "♥":
       return {
         ...store,
+        drawPile: updatedDrawpile,
         health:
           store.health + selectedCard.value > 21
             ? 21
@@ -123,8 +130,9 @@ function updateStore(action) {
     case "♦":
       return {
         ...store,
+        drawPile: updatedDrawpile,
         defence: selectedCard.value,
-        attack: selectedCard.value,
+        attack: "Shining new",
         round: updatedRound,
       };
     default:
