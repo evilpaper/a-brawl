@@ -136,7 +136,7 @@ export const PLAYING_CARDS = [
   },
   {
     suite: "♦",
-    rank: "A 11",
+    rank: "A",
     value: 11,
   },
   {

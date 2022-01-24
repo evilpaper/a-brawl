@@ -1,8 +1,9 @@
 import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
+const CARD_IN_ROUND = 4;
 
-function prepareDeck(array) {
+function resetDeck(array) {
   return array.map((item) => {
     return { ...item, played: false };
   });
@@ -21,12 +22,16 @@ function drawCards(deck, numberOfCards) {
   return [...deck.slice(0, numberOfCards)];
 }
 
-const playableDeck = prepareDeck(PLAYING_CARDS);
+const playableDeck = resetDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
+const initialDrawPile = [...deck];
+const initialRound = [...drawCards(initialDrawPile, 4)];
+
 let store = {
-  drawPile: [...deck],
-  round: [...drawCards(deck, 4)],
+  drawPile: [...initialDrawPile],
+  discardPile: [],
+  round: [...initialRound],
   discardPile: [],
   health: 21,
   defence: 0,
@@ -75,32 +80,45 @@ function updateStore(action) {
       card.suite === action.dataset.suite && card.rank === action.dataset.rank
   );
   // Create a copy of the current round
-  const updatedRound = [...store.round];
+  let updatedRound = [...store.round];
   // Set played = true for the selected card in the current round
   updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
   // Not supernice
   const damage =
     selectedCard.value > store.defence ? selectedCard.value - store.defence : 0;
 
+  const allCardsInRoundPlayed =
+    updatedRound.filter((card) => {
+      return card.played === true;
+    }).length === CARD_IN_ROUND;
+
+  if (allCardsInRoundPlayed) {
+    updatedRound = [...drawCards(store.drawPile, 4)];
+  }
+
   switch (action.dataset.suite) {
     case "♣":
       return {
         ...store,
-        health: store.health - damage,
+        health: store.health - damage < 0 ? 0 : store.health - damage,
         attack: selectedCard.value - 1,
         round: updatedRound,
       };
     case "♠":
       return {
         ...store,
-        health: store.health - damage,
+        health: store.health - damage < 0 ? 0 : store.health - damage,
         attack: selectedCard.value - 1,
         round: updatedRound,
       };
     case "♥":
       return {
         ...store,
-        health: store.health + selectedCard.value,
+        health:
+          store.health + selectedCard.value > 21
+            ? 21
+            : store.health + selectedCard.value,
+        round: updatedRound,
       };
     case "♦":
       return {
@@ -112,7 +130,6 @@ function updateStore(action) {
     default:
       return store;
   }
-  return updatedStore;
 }
 
 app.addEventListener("click", (e) => {
