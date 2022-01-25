@@ -33,7 +33,7 @@ let store = {
   round: [...initialRound],
   health: 21,
   strength: 0,
-  durability: "Select a brawler",
+  durability: "No brawler selected",
 };
 
 function drawGame(store) {
@@ -105,6 +105,13 @@ function updateStore(action) {
     // Pick first 4 cards from draw pile
     updatedRound = [...drawCards(store.drawPile, 4)];
     updatedDrawpile = [...store.drawPile.slice(4)];
+  }
+
+  function updateDurability(incoming, current) {
+    // If current = 0 => set to incoming
+    // if current = 'Select a brawler' => set to incoming
+    // if incoming >= current => set to "K-O"
+    // if incoming < current => set to incoming - 1
   }
 
   switch (action.dataset.suite) {
