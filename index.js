@@ -25,8 +25,8 @@ function drawCards(deck, numberOfCards) {
 const playableDeck = resetDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
-const initialDrawPile = [...deck];
-const initialRound = [...drawCards(initialDrawPile, 4)];
+const initialRound = deck.slice(0, 4);
+const initialDrawPile = deck.slice(4);
 
 let store = {
   drawPile: [...initialDrawPile],
@@ -78,12 +78,12 @@ function updateStore(action) {
       card.suite === action.dataset.suite && card.rank === action.dataset.rank
   );
   // Create a copy of the current round
-  // let updatedRound = [...store.round];
+  let updatedRound = [...store.round];
   let updatedDrawpile = [...store.drawPile];
   // Set played = true for the selected card in the current round
   // updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
 
-  const updatedRound = store.round.map((card, index) => {
+  updatedRound = store.round.map((card, index) => {
     if (index === indexOfSelectedCard) {
       return { ...card, played: true };
     } else {
