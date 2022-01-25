@@ -33,7 +33,7 @@ let store = {
   round: [...initialRound],
   health: 21,
   strength: 0,
-  durability: 0,
+  durability: "Select a brawler",
 };
 
 function drawGame(store) {
@@ -80,9 +80,8 @@ function updateStore(action) {
   // Create a copy of the current round
   let updatedRound = [...store.round];
   let updatedDrawpile = [...store.drawPile];
-  // Set played = true for the selected card in the current round
-  // updatedRound[indexOfSelectedCard] = { ...selectedCard, played: true };
 
+  // Set played = true for the selected card in the current round
   updatedRound = store.round.map((card, index) => {
     if (index === indexOfSelectedCard) {
       return { ...card, played: true };
@@ -106,7 +105,6 @@ function updateStore(action) {
     // Pick first 4 cards from draw pile
     updatedRound = [...drawCards(store.drawPile, 4)];
     updatedDrawpile = [...store.drawPile.slice(4)];
-    console.log("Cards in drawPile ", updatedDrawpile.length);
   }
 
   switch (action.dataset.suite) {
@@ -141,7 +139,7 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         strength: selectedCard.value,
-        durability: "Shining new",
+        durability: "Bring it on",
         round: updatedRound,
       };
     default:
