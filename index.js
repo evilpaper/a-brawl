@@ -107,11 +107,16 @@ function updateStore(action) {
     updatedDrawpile = [...store.drawPile.slice(4)];
   }
 
-  function updateDurability(incoming, current) {
+  function getDurabilityAfterEnemyStrike(incoming, current) {
     // If current = 0 => set to incoming
-    // if current = 'Select a brawler' => set to incoming
+    if (current === 0) return incoming;
+    // if current = 'No brawler selected' => set to incoming
+    if (current === "No brawler selected") return current;
     // if incoming >= current => set to "K-O"
+    if (incoming >= current) return "K-O";
     // if incoming < current => set to incoming - 1
+    if (incoming < current) return incoming - 1;
+    return store.durability;
   }
 
   switch (action.dataset.suite) {
@@ -120,7 +125,11 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        durability: selectedCard.value - 1,
+        // durability: selectedCard.value - 1,
+        durability: getDurabilityAfterEnemyStrike(
+          selectedCard.value,
+          store.durability
+        ),
         round: updatedRound,
       };
     case "♠":
@@ -128,7 +137,11 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        durability: selectedCard.value - 1,
+        // durability: selectedCard.value - 1,
+        durability: getDurabilityAfterEnemyStrike(
+          selectedCard.value,
+          store.durability
+        ),
         round: updatedRound,
       };
     case "♥":
