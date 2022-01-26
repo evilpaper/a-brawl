@@ -108,15 +108,13 @@ function updateStore(action) {
   }
 
   function getDurabilityAfterEnemyStrike(incoming, current) {
-    // If current = 0 => set to incoming
-    if (current === 0) return incoming;
-    // if current = 'No brawler selected' => set to incoming
-    if (current === "No brawler selected") return current;
-    // if incoming >= current => set to "K-O"
+    // First hit
+    if (current === "Bring it on") return incoming - 1;
+    // Enemy strength more than last enemy
     if (incoming >= current) return "K-O";
-    // if incoming < current => set to incoming - 1
+    // Enemy strength less than last enemy
     if (incoming < current) return incoming - 1;
-    return store.durability;
+    return current;
   }
 
   switch (action.dataset.suite) {
@@ -125,7 +123,7 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        // durability: selectedCard.value - 1,
+
         durability: getDurabilityAfterEnemyStrike(
           selectedCard.value,
           store.durability
@@ -137,7 +135,6 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-        // durability: selectedCard.value - 1,
         durability: getDurabilityAfterEnemyStrike(
           selectedCard.value,
           store.durability
