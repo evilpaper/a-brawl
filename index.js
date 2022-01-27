@@ -107,14 +107,14 @@ function updateStore(action) {
     updatedDrawpile = [...store.drawPile.slice(4)];
   }
 
-  function getDurabilityAfterEnemyStrike(incoming, current) {
+  function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
     // First hit
-    if (current === "Bring it on") return incoming - 1;
+    if (currentDurability === "Bring it on") return enemyStrength - 1;
     // Enemy strength more than last enemy
-    if (incoming >= current) return "K-O";
+    if (enemyStrength >= currentDurability) return "K-O";
     // Enemy strength less than last enemy
-    if (incoming < current) return incoming - 1;
-    return current;
+    if (enemyStrength < currentDurability) return enemyStrength - 1;
+    return currentDurability;
   }
 
   switch (action.dataset.suite) {
