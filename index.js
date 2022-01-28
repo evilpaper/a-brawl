@@ -117,13 +117,26 @@ function updateStore(action) {
     return currentDurability;
   }
 
+  function getStrenghtAfterEnemyStrike(
+    enemyStrength,
+    currentStrength,
+    currentDurability
+  ) {
+    if (enemyStrength >= currentDurability) return 0;
+    return currentStrength;
+  }
+
   switch (action.dataset.suite) {
     case "♣":
       return {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
-
+        strength: getStrenghtAfterEnemyStrike(
+          selectedCard.value,
+          store.strength,
+          store.durability
+        ),
         durability: getDurabilityAfterEnemyStrike(
           selectedCard.value,
           store.durability
@@ -135,6 +148,11 @@ function updateStore(action) {
         ...store,
         drawPile: updatedDrawpile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
+        strength: getStrenghtAfterEnemyStrike(
+          selectedCard.value,
+          store.strength,
+          store.durability
+        ),
         durability: getDurabilityAfterEnemyStrike(
           selectedCard.value,
           store.durability
