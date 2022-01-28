@@ -42,9 +42,9 @@ function drawGame(store) {
   app.innerHTML = "";
 
   scoreboard = `
-    <p>Health: ${store.health}</p>
-    <p>Strength: ${store.strength}</p>
-    <p>Durability: ${store.durability}</p>
+    <p>Team health: ${store.health} ♥</p>
+    <p>Brawler strength: ${store.strength} ♦</p>
+    <p>Brawler durability: ${store.durability}</p>
   `;
 
   for (const card of store.round) {
