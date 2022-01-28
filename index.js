@@ -42,9 +42,9 @@ function drawGame(store) {
   app.innerHTML = "";
 
   scoreboard = `
-    <p>Team health: ${store.health} ♥</p>
-    <p>Brawler strength: ${store.strength} ♦</p>
-    <p>Brawler durability: ${store.durability}</p>
+    <p>Team health, ♥ : ${store.health}</p>
+    <p>Brawler strength, ♦ : ${store.strength}</p>
+    <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
   `;
 
   for (const card of store.round) {
@@ -55,7 +55,9 @@ function drawGame(store) {
         ${card.played ? "disabled" : ""}
         >
           <div class="upperleft">${card.suite}</div>
-          <div>${card.rank} ${card.value > 10 ? card.value : ""}</div>
+          <div>${
+            card.value > 10 ? card.rank + " " + card.value : card.value
+          }</div>
           <div class="lowerright">${card.suite}</div>
       </button>`;
   }
