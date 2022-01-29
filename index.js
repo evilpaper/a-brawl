@@ -67,6 +67,25 @@ function drawGame(store) {
   app.innerHTML = scoreboard + cardHTML;
 }
 
+function getStrenghtAfterEnemyStrike(
+  enemyStrength,
+  currentStrength,
+  currentDurability
+) {
+  if (enemyStrength >= currentDurability) return 0;
+  return currentStrength;
+}
+
+function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
+  // First hit
+  if (currentDurability === "Bring it on") return enemyStrength - 1;
+  // Enemy strength more than last enemy
+  if (enemyStrength >= currentDurability) return "K-O";
+  // Enemy strength less than last enemy
+  if (enemyStrength < currentDurability) return enemyStrength - 1;
+  return currentDurability;
+}
+
 function updateStore(action) {
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
@@ -107,25 +126,6 @@ function updateStore(action) {
     // Pick first 4 cards from draw pile
     updatedRound = [...drawCards(store.drawPile, 4)];
     updatedDrawpile = [...store.drawPile.slice(4)];
-  }
-
-  function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
-    // First hit
-    if (currentDurability === "Bring it on") return enemyStrength - 1;
-    // Enemy strength more than last enemy
-    if (enemyStrength >= currentDurability) return "K-O";
-    // Enemy strength less than last enemy
-    if (enemyStrength < currentDurability) return enemyStrength - 1;
-    return currentDurability;
-  }
-
-  function getStrenghtAfterEnemyStrike(
-    enemyStrength,
-    currentStrength,
-    currentDurability
-  ) {
-    if (enemyStrength >= currentDurability) return 0;
-    return currentStrength;
   }
 
   switch (action.dataset.suite) {
