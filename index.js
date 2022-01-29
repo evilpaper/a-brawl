@@ -37,15 +37,15 @@ let store = {
 };
 
 function drawGame(store) {
-  let scoreboard = "";
   let cards = "";
-  app.innerHTML = "";
 
-  scoreboard = `
+  const scoreboardHTML = `
     <p>Team health, ♥ : ${store.health}</p>
     <p>Brawler strength, ♦ : ${store.strength}</p>
     <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
   `;
+
+  const actionsHTML = `<button class="Run">Run</button>`;
 
   for (const card of store.round) {
     cards += `<button 
@@ -64,7 +64,7 @@ function drawGame(store) {
 
   const cardHTML = `<section class="round" section>${cards}</section>`;
 
-  app.innerHTML = scoreboard + cardHTML;
+  app.innerHTML = scoreboardHTML + actionsHTML + cardHTML;
 }
 
 function getStrenghtAfterEnemyStrike(
@@ -185,7 +185,8 @@ function updateStore(action) {
 }
 
 app.addEventListener("click", (e) => {
-  const card = e.target.closest("button");
+  console.log(e.target);
+  const card = e.target.closest(".card");
   if (card) {
     store = updateStore(card);
     drawGame(store);
