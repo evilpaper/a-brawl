@@ -45,7 +45,7 @@ function drawGame(store) {
     <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
   `;
 
-  const actionsHTML = `<button class="Run">Run</button>`;
+  const actionsHTML = `<button class="run">Run</button>`;
 
   for (const card of store.round) {
     cards += `<button 
@@ -185,11 +185,14 @@ function updateStore(action) {
 }
 
 app.addEventListener("click", (e) => {
-  console.log(e.target);
   const card = e.target.closest(".card");
+  const run = e.target.closest(".run");
   if (card) {
     store = updateStore(card);
     drawGame(store);
+  }
+  if (run) {
+    console.log("Run away");
   }
 });
 
