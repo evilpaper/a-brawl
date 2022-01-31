@@ -3,6 +3,12 @@ import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 const app = document.querySelector("#root");
 const CARD_IN_ROUND = 4;
 
+const RUN = { type: "RUN" };
+const PICK_CLUB = { type: "PICK_CLUB" };
+const PICK_SPADE = { type: "PICK_SPADE" };
+const PICK_DIAMOND = { type: "PICK_DIAMOND" };
+const PICK_HEART = { type: "PICK_HEART" };
+
 function resetDeck(array) {
   return array.map((item) => {
     return { ...item, played: false };
