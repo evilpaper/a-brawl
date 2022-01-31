@@ -51,11 +51,12 @@ function drawGame(store) {
     <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
   `;
 
-  const actionsHTML = `<button class="run">Run</button>`;
+  const actionsHTML = `<button data-button-type="run" class="run">Run</button>`;
 
   for (const card of store.round) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
+        data-button-type="${card.suite}"
         data-card="${card.suite + card.rank}" 
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
@@ -191,6 +192,10 @@ function updateStore(action) {
 }
 
 app.addEventListener("click", (e) => {
+  if (!e.target.closest("button")) return;
+  const button = e.target.closest("button");
+  const { buttonType } = button.dataset;
+
   const card = e.target.closest(".card");
   const run = e.target.closest(".run");
   if (card) {
