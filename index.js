@@ -8,6 +8,7 @@ const PICK_CLUB = { type: "PICK_CLUB" };
 const PICK_SPADE = { type: "PICK_SPADE" };
 const PICK_DIAMOND = { type: "PICK_DIAMOND" };
 const PICK_HEART = { type: "PICK_HEART" };
+const MAX_HEALTH = 21;
 
 function resetDeck(array) {
   return array.map((item) => {
@@ -37,7 +38,7 @@ const initialDrawPile = deck.slice(4);
 let store = {
   drawPile: [...initialDrawPile],
   round: [...initialRound],
-  health: 21,
+  health: MAX_HEALTH,
   strength: 0,
   durability: "No brawler selected",
 };
@@ -94,6 +95,11 @@ function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
 }
 
 function updateStore(action) {
+  // Properties used on card
+  // card.suite : string
+  // card.rank : string
+  // card.value : number
+
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
     return (
