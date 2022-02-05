@@ -1,13 +1,8 @@
 import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
-const CARD_IN_ROUND = 4;
 
-const RUN = { type: "RUN" };
-const PICK_CLUB = { type: "PICK_CLUB" };
-const PICK_SPADE = { type: "PICK_SPADE" };
-const PICK_DIAMOND = { type: "PICK_DIAMOND" };
-const PICK_HEART = { type: "PICK_HEART" };
+const CARD_IN_ROUND = 4;
 const MAX_HEALTH = 21;
 
 function resetDeck(array) {
@@ -85,11 +80,8 @@ function getStrenghtAfterEnemyStrike(
 }
 
 function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
-  // First hit
   if (currentDurability === "Bring it on") return enemyStrength - 1;
-  // Enemy strength more than last enemy
   if (enemyStrength >= currentDurability) return "K-O";
-  // Enemy strength less than last enemy
   if (enemyStrength < currentDurability) return enemyStrength - 1;
   return currentDurability;
 }
@@ -104,15 +96,20 @@ function updateRound(round, indexOfSelectedCard) {
   });
 }
 
+function getCardIndex(round, action) {
+  return round.findIndex(
+    (card) => card.suite === action.type && card.rank === action.rank
+  );
+}
+
 function updateStore(action) {
-  // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
     return card.suite === action.type && card.rank === action.rank;
   });
   // Get the index of the selected card
-  const indexOfSelectedCard = store.round.findIndex(
-    (card) => card.suite === action.type && card.rank === action.rank
-  );
+  // const indexOfSelectedCard = store.round.findIndex(
+  //   (card) => card.suite === action.type && card.rank === action.rank
+  // );
   // Create a copy of the current round
   let updatedRound = [...store.round];
   let updatedDrawpile = [...store.drawPile];
@@ -159,7 +156,7 @@ function updateStore(action) {
           selectedCard.value,
           store.durability
         ),
-        round: updateRound(store.round, indexOfSelectedCard),
+        round: updateRound(store.round, getCardIndex(store.round, action)),
       };
     case "♥":
       return {
@@ -169,7 +166,7 @@ function updateStore(action) {
           store.health + selectedCard.value > 21
             ? 21
             : store.health + selectedCard.value,
-        round: updateRound(store.round, indexOfSelectedCard),
+        round: updateRound(store.round, getCardIndex(store.round, action)),
       };
     case "♦":
       return {
@@ -177,7 +174,7 @@ function updateStore(action) {
         drawPile: updatedDrawpile,
         strength: selectedCard.value,
         durability: "Bring it on",
-        round: updateRound(store.round, indexOfSelectedCard),
+        round: updateRound(store.round, getCardIndex(store.round, action)),
       };
     default:
       return store;
