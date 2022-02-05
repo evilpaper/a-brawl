@@ -94,6 +94,16 @@ function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
   return currentDurability;
 }
 
+function updateRound(round, indexOfSelectedCard) {
+  return round.map((card, index) => {
+    if (index === indexOfSelectedCard) {
+      return { ...card, played: true };
+    } else {
+      return { ...card };
+    }
+  });
+}
+
 function updateStore(action) {
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
@@ -108,15 +118,13 @@ function updateStore(action) {
   let updatedDrawpile = [...store.drawPile];
 
   // Set played = true for the selected card in the current round
-  updatedRound = store.round.map((card, index) => {
-    if (index === indexOfSelectedCard) {
-      return { ...card, played: true };
-    } else {
-      return { ...card };
-    }
-  });
-
-  console.log(updatedRound);
+  // updatedRound = store.round.map((card, index) => {
+  //   if (index === indexOfSelectedCard) {
+  //     return { ...card, played: true };
+  //   } else {
+  //     return { ...card };
+  //   }
+  // });
 
   // Not supernice
   const damage =
@@ -137,21 +145,6 @@ function updateStore(action) {
 
   switch (action.type) {
     case "♣":
-      return {
-        ...store,
-        drawPile: updatedDrawpile,
-        health: store.health - damage < 0 ? 0 : store.health - damage,
-        strength: getStrenghtAfterEnemyStrike(
-          selectedCard.value,
-          store.strength,
-          store.durability
-        ),
-        durability: getDurabilityAfterEnemyStrike(
-          selectedCard.value,
-          store.durability
-        ),
-        round: updatedRound,
-      };
     case "♠":
       return {
         ...store,
@@ -166,7 +159,7 @@ function updateStore(action) {
           selectedCard.value,
           store.durability
         ),
-        round: updatedRound,
+        round: updateRound(store.round, indexOfSelectedCard),
       };
     case "♥":
       return {
@@ -176,7 +169,7 @@ function updateStore(action) {
           store.health + selectedCard.value > 21
             ? 21
             : store.health + selectedCard.value,
-        round: updatedRound,
+        round: updateRound(store.round, indexOfSelectedCard),
       };
     case "♦":
       return {
@@ -184,7 +177,7 @@ function updateStore(action) {
         drawPile: updatedDrawpile,
         strength: selectedCard.value,
         durability: "Bring it on",
-        round: updatedRound,
+        round: updateRound(store.round, indexOfSelectedCard),
       };
     default:
       return store;
