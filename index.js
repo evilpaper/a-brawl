@@ -95,21 +95,13 @@ function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
 }
 
 function updateStore(action) {
-  // Properties used on card
-  // card.suite : string
-  // card.rank : string
-  // card.value : number
-
   // Get the selected card
   const [selectedCard] = store.round.filter((card) => {
-    return (
-      card.suite === action.dataset.suite && card.rank === action.dataset.rank
-    );
+    return card.suite === action.type && card.rank === action.rank;
   });
   // Get the index of the selected card
   const indexOfSelectedCard = store.round.findIndex(
-    (card) =>
-      card.suite === action.dataset.suite && card.rank === action.dataset.rank
+    (card) => card.suite === action.type && card.rank === action.rank
   );
   // Create a copy of the current round
   let updatedRound = [...store.round];
@@ -123,6 +115,8 @@ function updateStore(action) {
       return { ...card };
     }
   });
+
+  console.log(updatedRound);
 
   // Not supernice
   const damage =
@@ -141,7 +135,7 @@ function updateStore(action) {
     updatedDrawpile = [...store.drawPile.slice(4)];
   }
 
-  switch (action.dataset.suite) {
+  switch (action.type) {
     case "♣":
       return {
         ...store,
@@ -200,17 +194,32 @@ function updateStore(action) {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  const { buttonType } = button.dataset;
+  const { buttonType, rank } = button.dataset;
 
-  const card = e.target.closest(".card");
-  const run = e.target.closest(".run");
-  if (card) {
-    store = updateStore(card);
-    drawGame(store);
-  }
-  if (run) {
-    console.log("Run away");
-  }
+  const action = (type) => {
+    switch (type) {
+      case "♣":
+      case "♠":
+      case "♥":
+      case "♦":
+        return {
+          type: type,
+          rank: rank,
+        };
+
+      case "RUN":
+        return {
+          type: type,
+        };
+      default:
+        return {
+          type: type,
+        };
+    }
+  };
+
+  store = updateStore(action(buttonType));
+  drawGame(store);
 });
 
 drawGame(store);
