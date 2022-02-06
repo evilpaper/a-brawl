@@ -86,7 +86,7 @@ function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
   return currentDurability;
 }
 
-function updateRound(round, indexOfSelectedCard) {
+function setCardToPlayed(round, indexOfSelectedCard) {
   return round.map((card, index) => {
     if (index === indexOfSelectedCard) {
       return { ...card, played: true };
@@ -94,6 +94,20 @@ function updateRound(round, indexOfSelectedCard) {
       return { ...card };
     }
   });
+}
+
+function updateRound(round, indexOfSelectedCard) {
+  const updatedRound = setCardToPlayed(round, indexOfSelectedCard);
+  const allCardsInRoundPlayed =
+    updatedRound.filter((card) => {
+      return card.played === true;
+    }).length === CARD_IN_ROUND;
+
+  if (allCardsInRoundPlayed) {
+    return [...drawCards(store.drawPile, 4)];
+  } else {
+    return updatedRound;
+  }
 }
 
 function getCardIndex(round, action) {
@@ -106,22 +120,6 @@ function updateStore(action) {
   const [selectedCard] = store.round.filter((card) => {
     return card.suite === action.type && card.rank === action.rank;
   });
-  // Get the index of the selected card
-  // const indexOfSelectedCard = store.round.findIndex(
-  //   (card) => card.suite === action.type && card.rank === action.rank
-  // );
-  // Create a copy of the current round
-  let updatedRound = [...store.round];
-  let updatedDrawpile = [...store.drawPile];
-
-  // Set played = true for the selected card in the current round
-  // updatedRound = store.round.map((card, index) => {
-  //   if (index === indexOfSelectedCard) {
-  //     return { ...card, played: true };
-  //   } else {
-  //     return { ...card };
-  //   }
-  // });
 
   // Not supernice
   const damage =
@@ -129,13 +127,7 @@ function updateStore(action) {
       ? selectedCard.value - store.strength
       : 0;
 
-  const allCardsInRoundPlayed =
-    updatedRound.filter((card) => {
-      return card.played === true;
-    }).length === CARD_IN_ROUND;
-
   if (allCardsInRoundPlayed) {
-    // Pick first 4 cards from draw pile
     updatedRound = [...drawCards(store.drawPile, 4)];
     updatedDrawpile = [...store.drawPile.slice(4)];
   }
