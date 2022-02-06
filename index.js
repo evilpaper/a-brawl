@@ -102,7 +102,6 @@ function updateRound(round, indexOfSelectedCard) {
     updatedRound.filter((card) => {
       return card.played === true;
     }).length === CARDS_IN_ROUND;
-
   if (allCardsInRoundPlayed) {
     return [...drawCards(store.drawPile, 4)];
   } else {
@@ -125,16 +124,16 @@ function isAllCardsInRoundPlayed(round) {
   );
 }
 
+function getDamage(brawlerStength, opponentStrength) {
+  return opponentStrength > brawlerStength
+    ? opponentStrength - brawlerStength
+    : 0;
+}
+
 function updateStore(action) {
   const [selectedCard] = store.round.filter((card) => {
     return card.suite === action.type && card.rank === action.rank;
   });
-
-  // Not supernice
-  const damage =
-    selectedCard.value > store.strength
-      ? selectedCard.value - store.strength
-      : 0;
 
   switch (action.type) {
     case "♣":
@@ -144,7 +143,10 @@ function updateStore(action) {
         drawPile: isAllCardsInRoundPlayed(store.round)
           ? [...store.drawPile.slice(4)]
           : store.drawPile,
-        health: store.health - damage < 0 ? 0 : store.health - damage,
+        health:
+          store.health - getDamage(store.strength, Number(action.rank)) < 0
+            ? 0
+            : store.health - getDamage(store.strength, Number(action.rank)),
         strength: getStrenghtAfterEnemyStrike(
           selectedCard.value,
           store.strength,
