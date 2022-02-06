@@ -39,6 +39,7 @@ let store = {
 };
 
 function drawGame(store) {
+  console.log(store);
   let cards = "";
 
   const scoreboardHTML = `
@@ -47,13 +48,14 @@ function drawGame(store) {
     <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
   `;
 
-  const actionsHTML = `<button data-button-type="run" class="run">Run</button>`;
+  const actionsHTML = `<button data-button-type="RUN" class="run">Run</button>`;
 
   for (const card of store.round) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
         data-button-type="${card.suite}"
         data-card="${card.suite + card.rank}" 
+        data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
         >
@@ -130,11 +132,15 @@ function getDamage(brawlerStength, opponentStrength) {
     : 0;
 }
 
-function updateStore(action) {
-  const [selectedCard] = store.round.filter((card) => {
-    return card.suite === action.type && card.rank === action.rank;
+function putBackUnusedCards(round) {
+  const cards = round.filter((card) => {
+    return card.played !== true;
   });
+  return [...store.drawPile, ...cards].slice(4);
+}
 
+function updateStore(action) {
+  const cardValue = action.value;
   switch (action.type) {
     case "♣":
     case "♠":
@@ -144,18 +150,15 @@ function updateStore(action) {
           ? [...store.drawPile.slice(4)]
           : store.drawPile,
         health:
-          store.health - getDamage(store.strength, Number(action.rank)) < 0
+          store.health - getDamage(store.strength, cardValue) < 0
             ? 0
-            : store.health - getDamage(store.strength, Number(action.rank)),
+            : store.health - getDamage(store.strength, cardValue),
         strength: getStrenghtAfterEnemyStrike(
-          selectedCard.value,
+          cardValue,
           store.strength,
           store.durability
         ),
-        durability: getDurabilityAfterEnemyStrike(
-          selectedCard.value,
-          store.durability
-        ),
+        durability: getDurabilityAfterEnemyStrike(cardValue, store.durability),
         round: updateRound(store.round, getCardIndex(store.round, action)),
       };
     case "♥":
@@ -164,10 +167,7 @@ function updateStore(action) {
         drawPile: isAllCardsInRoundPlayed(store.round)
           ? [...store.drawPile.slice(4)]
           : store.drawPile,
-        health:
-          store.health + selectedCard.value > 21
-            ? 21
-            : store.health + selectedCard.value,
+        health: store.health + cardValue > 21 ? 21 : store.health + cardValue,
         round: updateRound(store.round, getCardIndex(store.round, action)),
       };
     case "♦":
@@ -176,9 +176,17 @@ function updateStore(action) {
         drawPile: isAllCardsInRoundPlayed(store.round)
           ? [...store.drawPile.slice(4)]
           : store.drawPile,
-        strength: selectedCard.value,
+        strength: cardValue,
         durability: "Bring it on",
         round: updateRound(store.round, getCardIndex(store.round, action)),
+      };
+    case "RUN":
+      return {
+        ...store,
+        drawPile: isAllCardsInRoundPlayed(store.round)
+          ? [...store.drawPile.slice(4)]
+          : putBackUnusedCards(store.round),
+        round: [...drawCards(store.drawPile, 4)],
       };
     default:
       return store;
@@ -188,7 +196,7 @@ function updateStore(action) {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  const { buttonType, rank } = button.dataset;
+  const { buttonType, rank, value } = button.dataset;
 
   const action = (type) => {
     switch (type) {
@@ -199,8 +207,8 @@ app.addEventListener("click", (e) => {
         return {
           type: type,
           rank: rank,
+          value: value,
         };
-
       case "RUN":
         return {
           type: type,
