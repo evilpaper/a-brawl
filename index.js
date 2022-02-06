@@ -2,7 +2,7 @@ import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
 
-const CARD_IN_ROUND = 4;
+const CARDS_IN_ROUND = 4;
 const MAX_HEALTH = 21;
 
 function resetDeck(array) {
@@ -101,7 +101,7 @@ function updateRound(round, indexOfSelectedCard) {
   const allCardsInRoundPlayed =
     updatedRound.filter((card) => {
       return card.played === true;
-    }).length === CARD_IN_ROUND;
+    }).length === CARDS_IN_ROUND;
 
   if (allCardsInRoundPlayed) {
     return [...drawCards(store.drawPile, 4)];
@@ -116,6 +116,15 @@ function getCardIndex(round, action) {
   );
 }
 
+function isAllCardsInRoundPlayed(round) {
+  return (
+    round.filter((card) => {
+      return card.played === true;
+    }).length ===
+    CARDS_IN_ROUND - 1
+  );
+}
+
 function updateStore(action) {
   const [selectedCard] = store.round.filter((card) => {
     return card.suite === action.type && card.rank === action.rank;
@@ -127,17 +136,14 @@ function updateStore(action) {
       ? selectedCard.value - store.strength
       : 0;
 
-  if (allCardsInRoundPlayed) {
-    updatedRound = [...drawCards(store.drawPile, 4)];
-    updatedDrawpile = [...store.drawPile.slice(4)];
-  }
-
   switch (action.type) {
     case "♣":
     case "♠":
       return {
         ...store,
-        drawPile: updatedDrawpile,
+        drawPile: isAllCardsInRoundPlayed(store.round)
+          ? [...store.drawPile.slice(4)]
+          : store.drawPile,
         health: store.health - damage < 0 ? 0 : store.health - damage,
         strength: getStrenghtAfterEnemyStrike(
           selectedCard.value,
@@ -153,7 +159,9 @@ function updateStore(action) {
     case "♥":
       return {
         ...store,
-        drawPile: updatedDrawpile,
+        drawPile: isAllCardsInRoundPlayed(store.round)
+          ? [...store.drawPile.slice(4)]
+          : store.drawPile,
         health:
           store.health + selectedCard.value > 21
             ? 21
@@ -163,7 +171,9 @@ function updateStore(action) {
     case "♦":
       return {
         ...store,
-        drawPile: updatedDrawpile,
+        drawPile: isAllCardsInRoundPlayed(store.round)
+          ? [...store.drawPile.slice(4)]
+          : store.drawPile,
         strength: selectedCard.value,
         durability: "Bring it on",
         round: updateRound(store.round, getCardIndex(store.round, action)),
