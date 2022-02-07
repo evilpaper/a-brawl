@@ -2,7 +2,7 @@ import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
 
-const CARDS_IN_ROUND = 4;
+const CARDS_IN_wave = 4;
 const MAX_HEALTH = 21;
 
 function resetDeck(array) {
@@ -27,30 +27,30 @@ function drawCards(deck, numberOfCards) {
 const playableDeck = resetDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
-const initialRound = deck.slice(0, 4);
+const initialwave = deck.slice(0, 4);
 const initialDrawPile = deck.slice(4);
 
-let store = {
+let state = {
   drawPile: [...initialDrawPile],
-  round: [...initialRound],
+  wave: [...initialwave],
   health: MAX_HEALTH,
   strength: 0,
   durability: "No brawler selected",
 };
 
-function drawGame(store) {
-  console.log(store);
+function drawGame(state) {
+  console.log(state);
   let cards = "";
 
   const scoreboardHTML = `
-    <p>Team health, ♥ : ${store.health}</p>
-    <p>Brawler strength, ♦ : ${store.strength}</p>
-    <p>Brawler durability, ♠ or ♣ : ${store.durability}</p>
+    <p>Team health, ♥ : ${state.health}</p>
+    <p>Brawler strength, ♦ : ${state.strength}</p>
+    <p>Brawler durability, ♠ or ♣ : ${state.durability}</p>
   `;
 
   const actionsHTML = `<button data-button-type="RUN" class="run">Run</button>`;
 
-  for (const card of store.round) {
+  for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
         data-button-type="${card.suite}"
@@ -67,7 +67,7 @@ function drawGame(store) {
       </button>`;
   }
 
-  const cardHTML = `<section class="round" section>${cards}</section>`;
+  const cardHTML = `<section class="wave" section>${cards}</section>`;
 
   app.innerHTML = scoreboardHTML + actionsHTML + cardHTML;
 }
@@ -88,8 +88,8 @@ function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
   return currentDurability;
 }
 
-function setCardToPlayed(round, indexOfSelectedCard) {
-  return round.map((card, index) => {
+function setCardToPlayed(wave, indexOfSelectedCard) {
+  return wave.map((card, index) => {
     if (index === indexOfSelectedCard) {
       return { ...card, played: true };
     } else {
@@ -98,31 +98,31 @@ function setCardToPlayed(round, indexOfSelectedCard) {
   });
 }
 
-function updateRound(round, indexOfSelectedCard) {
-  const updatedRound = setCardToPlayed(round, indexOfSelectedCard);
-  const allCardsInRoundPlayed =
-    updatedRound.filter((card) => {
+function updatewave(wave, indexOfSelectedCard) {
+  const updatedwave = setCardToPlayed(wave, indexOfSelectedCard);
+  const allCardsInwavePlayed =
+    updatedwave.filter((card) => {
       return card.played === true;
-    }).length === CARDS_IN_ROUND;
-  if (allCardsInRoundPlayed) {
-    return [...drawCards(store.drawPile, 4)];
+    }).length === CARDS_IN_wave;
+  if (allCardsInwavePlayed) {
+    return [...drawCards(state.drawPile, 4)];
   } else {
-    return updatedRound;
+    return updatedwave;
   }
 }
 
-function getCardIndex(round, action) {
-  return round.findIndex(
+function getCardIndex(wave, action) {
+  return wave.findIndex(
     (card) => card.suite === action.type && card.rank === action.rank
   );
 }
 
-function isAllCardsInRoundPlayed(round) {
+function isAllCardsInwavePlayed(wave) {
   return (
-    round.filter((card) => {
+    wave.filter((card) => {
       return card.played === true;
     }).length ===
-    CARDS_IN_ROUND - 1
+    CARDS_IN_wave - 1
   );
 }
 
@@ -132,70 +132,75 @@ function getDamage(brawlerStength, opponentStrength) {
     : 0;
 }
 
-function putBackUnusedCards(round) {
-  const cards = round.filter((card) => {
+function putBackUnusedCards(wave) {
+  const cards = wave.filter((card) => {
     return card.played !== true;
   });
-  return [...store.drawPile, ...cards].slice(4);
+  return [...state.drawPile, ...cards].slice(4);
 }
 
-function updateStore(action) {
+function updatestate(action) {
   const cardValue = action.value;
   switch (action.type) {
     case "♣":
     case "♠":
       return {
-        ...store,
-        drawPile: isAllCardsInRoundPlayed(store.round)
-          ? [...store.drawPile.slice(4)]
-          : store.drawPile,
+        ...state,
+        drawPile: isAllCardsInwavePlayed(state.wave)
+          ? [...state.drawPile.slice(4)]
+          : state.drawPile,
         health:
-          store.health - getDamage(store.strength, cardValue) < 0
+          state.health - getDamage(state.strength, cardValue) < 0
             ? 0
-            : store.health - getDamage(store.strength, cardValue),
+            : state.health - getDamage(state.strength, cardValue),
         strength: getStrenghtAfterEnemyStrike(
           cardValue,
-          store.strength,
-          store.durability
+          state.strength,
+          state.durability
         ),
-        durability: getDurabilityAfterEnemyStrike(cardValue, store.durability),
-        round: updateRound(store.round, getCardIndex(store.round, action)),
+        durability: getDurabilityAfterEnemyStrike(cardValue, state.durability),
+        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♥":
       return {
-        ...store,
-        drawPile: isAllCardsInRoundPlayed(store.round)
-          ? [...store.drawPile.slice(4)]
-          : store.drawPile,
-        health: store.health + cardValue > 21 ? 21 : store.health + cardValue,
-        round: updateRound(store.round, getCardIndex(store.round, action)),
+        ...state,
+        drawPile: isAllCardsInwavePlayed(state.wave)
+          ? [...state.drawPile.slice(4)]
+          : state.drawPile,
+        health: state.health + cardValue > 21 ? 21 : state.health + cardValue,
+        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♦":
       return {
-        ...store,
-        drawPile: isAllCardsInRoundPlayed(store.round)
-          ? [...store.drawPile.slice(4)]
-          : store.drawPile,
+        ...state,
+        drawPile: isAllCardsInwavePlayed(state.wave)
+          ? [...state.drawPile.slice(4)]
+          : state.drawPile,
         strength: cardValue,
         durability: "Bring it on",
-        round: updateRound(store.round, getCardIndex(store.round, action)),
+        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
       };
     case "RUN":
       return {
-        ...store,
-        drawPile: isAllCardsInRoundPlayed(store.round)
-          ? [...store.drawPile.slice(4)]
-          : putBackUnusedCards(store.round),
-        round: [...drawCards(store.drawPile, 4)],
+        ...state,
+        drawPile: isAllCardsInwavePlayed(state.wave)
+          ? [...state.drawPile.slice(4)]
+          : putBackUnusedCards(state.wave),
+        wave: [...drawCards(state.drawPile, 4)],
       };
     default:
-      return store;
+      return state;
   }
 }
 
 app.addEventListener("click", (e) => {
+  // Return without update if the click is not on a button
   if (!e.target.closest("button")) return;
+  // If click is on a button, capture the button
+  // Closest is needed to capture the button in case the click is on the content
+  // in the button, like on a card symbol.
   const button = e.target.closest("button");
+  // Get the valuable stuff from the button
   const { buttonType, rank, value } = button.dataset;
 
   const action = (type) => {
@@ -220,8 +225,8 @@ app.addEventListener("click", (e) => {
     }
   };
 
-  store = updateStore(action(buttonType));
-  drawGame(store);
+  state = updatestate(action(buttonType));
+  drawGame(state);
 });
 
-drawGame(store);
+drawGame(state);
