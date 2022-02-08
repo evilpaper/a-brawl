@@ -34,8 +34,8 @@ let state = {
   drawPile: [...initialDrawPile],
   wave: [...initialwave],
   health: MAX_HEALTH,
-  strength: "No brawler selected",
-  durability: "No brawler selected",
+  strength: 0,
+  durability: 0,
 };
 
 function drawGame(state) {
@@ -74,17 +74,17 @@ function drawGame(state) {
 function getStrenghtAfterEnemyStrike(
   enemyStrength,
   currentStrength,
-  currentDurability
+  brawlerDurability
 ) {
-  if (enemyStrength >= currentDurability) return 0;
+  if (enemyStrength >= brawlerDurability) return 0;
   return currentStrength;
 }
 
-function getDurabilityAfterEnemyStrike(enemyStrength, currentDurability) {
-  if (currentDurability === "Bring it on") return enemyStrength - 1;
-  if (enemyStrength >= currentDurability) return "K-O";
-  if (enemyStrength < currentDurability) return enemyStrength - 1;
-  return currentDurability;
+function getDurabilityAfterEnemyStrike(enemyStrength, brawlerDurability) {
+  if (brawlerDurability === 0) return enemyStrength - 1;
+  if (enemyStrength >= brawlerDurability) return 0;
+  if (enemyStrength < brawlerDurability) return enemyStrength - 1;
+  return brawlerDurability;
 }
 
 function setCardToPlayed(wave, indexOfSelectedCard) {
@@ -125,10 +125,12 @@ function isAllCardsInwavePlayed(wave) {
   );
 }
 
-function getDamage(brawlerStength, opponentStrength) {
-  return opponentStrength > brawlerStength
-    ? opponentStrength - brawlerStength
-    : 0;
+function getDamage(brawlerStrength, opponentStrength) {
+  console.log("brawlerStrength:", typeof brawlerStrength);
+  console.log("opponentStrength:", typeof opponentStrength);
+  if (opponentStrength > brawlerStrength)
+    return opponentStrength - brawlerStrength;
+  return 0;
 }
 
 function putBackUnusedCards(wave) {
@@ -139,7 +141,7 @@ function putBackUnusedCards(wave) {
 }
 
 function updatestate(action) {
-  const cardValue = action.value;
+  const cardValue = Number(action.value);
   switch (action.type) {
     case "♣":
     case "♠":
@@ -176,7 +178,7 @@ function updatestate(action) {
           ? [...state.drawPile.slice(4)]
           : state.drawPile,
         strength: cardValue,
-        durability: "Bring it on",
+        durability: 21,
         wave: updatewave(state.wave, getCardIndex(state.wave, action)),
       };
     case "evade":
