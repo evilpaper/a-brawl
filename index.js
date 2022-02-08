@@ -48,7 +48,7 @@ function drawGame(state) {
     <p>Brawler durability, ♠ or ♣ : ${state.durability}</p>
   `;
 
-  const actionsHTML = `<button data-button-type="RUN" class="run">Run</button>`;
+  const actionsHTML = `<button data-button-type="evade" class="evade">evade</button>`;
 
   for (const card of state.wave) {
     cards += `<button 
@@ -180,7 +180,7 @@ function updatestate(action) {
         durability: "Bring it on",
         wave: updatewave(state.wave, getCardIndex(state.wave, action)),
       };
-    case "RUN":
+    case "evade":
       return {
         ...state,
         drawPile: isAllCardsInwavePlayed(state.wave)
@@ -214,7 +214,7 @@ app.addEventListener("click", (e) => {
           rank: rank,
           value: value,
         };
-      case "RUN":
+      case "evade":
         return {
           type: type,
         };
