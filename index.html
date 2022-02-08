@@ -12,12 +12,25 @@
         justify-content: center;
         align-items: center;
       }
+      #root {
+        min-width: 19rem;
+      }
       .wave {
         display: flex;
+        justify-content: space-between;
+      }
+      .evade {
+        width: 100%;
+        border: 1px solid lightgrey;
+        border-radius: 0.4rem;
+      }
+      .evade:hover {
+        background-color: black;
+        color: white;
       }
       .card {
         padding: 0.4rem;
-        margin: 0.4rem;
+        margin: 0.4rem 0;
         display: flex;
         flex-direction: column;
         align-items: center;

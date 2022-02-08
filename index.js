@@ -2,7 +2,7 @@ import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
 
 const app = document.querySelector("#root");
 
-const CARDS_IN_wave = 4;
+const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
 
 function resetDeck(array) {
@@ -34,7 +34,7 @@ let state = {
   drawPile: [...initialDrawPile],
   wave: [...initialwave],
   health: MAX_HEALTH,
-  strength: 0,
+  strength: "No brawler selected",
   durability: "No brawler selected",
 };
 
@@ -43,18 +43,17 @@ function drawGame(state) {
   let cards = "";
 
   const scoreboardHTML = `
-    <p>Team health, ♥ : ${state.health}</p>
-    <p>Brawler strength, ♦ : ${state.strength}</p>
-    <p>Brawler durability, ♠ or ♣ : ${state.durability}</p>
+    <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
+    <p>♦ Brawler strength: ${state.strength}</p>
+    <p>♠ ♣ Brawler durability: ${state.durability}</p>
   `;
 
-  const actionsHTML = `<button data-button-type="evade" class="evade">evade</button>`;
+  const actionsHTML = `<button data-button-type="evade" class="evade">Evade</button>`;
 
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
         data-button-type="${card.suite}"
-        data-card="${card.suite + card.rank}" 
         data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
@@ -69,7 +68,7 @@ function drawGame(state) {
 
   const cardHTML = `<section class="wave" section>${cards}</section>`;
 
-  app.innerHTML = scoreboardHTML + actionsHTML + cardHTML;
+  app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
 }
 
 function getStrenghtAfterEnemyStrike(
@@ -103,7 +102,7 @@ function updatewave(wave, indexOfSelectedCard) {
   const allCardsInwavePlayed =
     updatedwave.filter((card) => {
       return card.played === true;
-    }).length === CARDS_IN_wave;
+    }).length === CARDS_IN_WAVE;
   if (allCardsInwavePlayed) {
     return [...drawCards(state.drawPile, 4)];
   } else {
@@ -122,7 +121,7 @@ function isAllCardsInwavePlayed(wave) {
     wave.filter((card) => {
       return card.played === true;
     }).length ===
-    CARDS_IN_wave - 1
+    CARDS_IN_WAVE - 1
   );
 }
 
@@ -194,8 +193,9 @@ function updatestate(action) {
 }
 
 app.addEventListener("click", (e) => {
-  // Return without update if the click is not on a button
+  // Return immediately if the click is not on a button
   if (!e.target.closest("button")) return;
+
   // If click is on a button, capture the button
   // Closest is needed to capture the button in case the click is on the content
   // in the button, like on a card symbol.
