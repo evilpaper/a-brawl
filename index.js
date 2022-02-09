@@ -41,6 +41,7 @@ let state = {
 function drawGame(state) {
   console.log(state);
   let cards = "";
+  const canEvade = state.wave.filter((card) => card.played).length > 2;
 
   const scoreboardHTML = `
     <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
@@ -48,7 +49,9 @@ function drawGame(state) {
     <p>♠ ♣ Brawler durability: ${state.durability}</p>
   `;
 
-  const actionsHTML = `<button data-button-type="evade" class="evade">Evade</button>`;
+  const actionsHTML = `<button data-button-type="evade" ${
+    canEvade ? "" : "disabled"
+  } class="evade">Evade</button>`;
 
   for (const card of state.wave) {
     cards += `<button 
@@ -139,7 +142,6 @@ function putBackUnusedCards(wave) {
   });
   return [...state.drawPile, ...cards].slice(4);
 }
-
 function updatestate(action) {
   const cardValue = Number(action.value);
   switch (action.type) {
