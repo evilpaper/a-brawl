@@ -45,13 +45,15 @@ function drawGame(state) {
 
   const scoreboardHTML = `
     <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
-    <p>♦ Brawler strength: ${state.strength}</p>
-    <p>♠ ♣ Brawler durability: ${state.durability}</p>
+    <p>♦ Brawler strength: ${state.strength === 0 ? "-" : state.strength}</p>
+    <p>♠ ♣ Brawler durability: ${
+      state.durability === 0 ? "-" : state.durability
+    }</p>
   `;
 
   const actionsHTML = `<button data-button-type="evade" ${
     canEvade ? "" : "disabled"
-  } class="evade">Evade</button>`;
+  } class="evade">Move on</button>`;
 
   for (const card of state.wave) {
     cards += `<button 
