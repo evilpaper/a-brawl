@@ -102,16 +102,16 @@ function setCardToPlayed(wave, indexOfSelectedCard) {
   });
 }
 
-function updatewave(wave, indexOfSelectedCard) {
-  const updatedwave = setCardToPlayed(wave, indexOfSelectedCard);
+function getUpdatedWave(wave, indexOfSelectedCard) {
+  const updatedWave = setCardToPlayed(wave, indexOfSelectedCard);
   const allCardsInwavePlayed =
-    updatedwave.filter((card) => {
+    updatedWave.filter((card) => {
       return card.played === true;
     }).length === CARDS_IN_WAVE;
   if (allCardsInwavePlayed) {
     return [...drawCards(state.drawPile, 4)];
   } else {
-    return updatedwave;
+    return updatedWave;
   }
 }
 
@@ -164,7 +164,7 @@ function updatestate(action) {
           state.durability
         ),
         durability: getDurabilityAfterEnemyStrike(cardValue, state.durability),
-        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
+        wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♥":
       return {
@@ -173,7 +173,7 @@ function updatestate(action) {
           ? [...state.drawPile.slice(4)]
           : state.drawPile,
         health: state.health + cardValue > 21 ? 21 : state.health + cardValue,
-        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
+        wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♦":
       return {
@@ -183,7 +183,7 @@ function updatestate(action) {
           : state.drawPile,
         strength: cardValue,
         durability: 21,
-        wave: updatewave(state.wave, getCardIndex(state.wave, action)),
+        wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "evade":
       return {
