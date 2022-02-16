@@ -138,6 +138,10 @@ function getDamage(brawlerStrength, opponentStrength) {
   return 0;
 }
 
+function getUpdatedDrawpile(wave, drawPile) {
+  return isAllCardsInwavePlayed(wave) ? [...drawPile.slice(4)] : drawPile;
+}
+
 function putBackUnusedCards(wave) {
   const cards = wave.filter((card) => {
     return card.played !== true;
@@ -151,9 +155,7 @@ function updatestate(action) {
     case "♠":
       return {
         ...state,
-        drawPile: isAllCardsInwavePlayed(state.wave)
-          ? [...state.drawPile.slice(4)]
-          : state.drawPile,
+        drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         health:
           state.health - getDamage(state.strength, cardValue) < 0
             ? 0
@@ -169,18 +171,14 @@ function updatestate(action) {
     case "♥":
       return {
         ...state,
-        drawPile: isAllCardsInwavePlayed(state.wave)
-          ? [...state.drawPile.slice(4)]
-          : state.drawPile,
+        drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         health: state.health + cardValue > 21 ? 21 : state.health + cardValue,
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♦":
       return {
         ...state,
-        drawPile: isAllCardsInwavePlayed(state.wave)
-          ? [...state.drawPile.slice(4)]
-          : state.drawPile,
+        drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         strength: cardValue,
         durability: 21,
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
