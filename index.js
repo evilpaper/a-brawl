@@ -5,25 +5,6 @@ const app = document.querySelector("#root");
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
 
-function resetDeck(array) {
-  return array.map((item) => {
-    return { ...item, played: false };
-  });
-}
-
-function shuffle(array) {
-  const shuffledArray = [...array];
-  for (let i = shuffledArray.length - 1; i > 0; i--) {
-    let j = Math.floor(Math.random() * (i + 1));
-    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
-  }
-  return shuffledArray;
-}
-
-function drawCards(deck, numberOfCards) {
-  return [...deck.slice(0, numberOfCards)];
-}
-
 const playableDeck = resetDeck(PLAYING_CARDS);
 const deck = shuffle([...playableDeck]);
 
@@ -74,6 +55,25 @@ function drawGame(state) {
   const cardHTML = `<section class="wave" section>${cards}</section>`;
 
   app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
+}
+
+function resetDeck(array) {
+  return array.map((item) => {
+    return { ...item, played: false };
+  });
+}
+
+function shuffle(array) {
+  const shuffledArray = [...array];
+  for (let i = shuffledArray.length - 1; i > 0; i--) {
+    let j = Math.floor(Math.random() * (i + 1));
+    [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]];
+  }
+  return shuffledArray;
+}
+
+function drawCards(deck, numberOfCards) {
+  return [...deck.slice(0, numberOfCards)];
 }
 
 function getStrenghtAfterEnemyStrike(
@@ -142,6 +142,12 @@ function getUpdatedDrawpile(wave, drawPile) {
   return isAllCardsInwavePlayed(wave) ? [...drawPile.slice(4)] : drawPile;
 }
 
+function getUpdatedDrawpileWhenEvade(wave) {
+  return isAllCardsInwavePlayed(wave)
+    ? [...state.drawPile.slice(4)]
+    : putBackUnusedCards(wave);
+}
+
 function getHealthAfterEnemyStrike(health, brawlerStrength, opponentStrength) {
   if (health - getDamage(brawlerStrength, opponentStrength) < 0) return 0;
   return health - getDamage(brawlerStrength, opponentStrength);
@@ -155,7 +161,7 @@ function putBackUnusedCards(wave) {
 }
 
 function updatestate(action) {
-  const cardValue = Number(action.value);
+  const currentCardValue = Number(action.value);
   switch (action.type) {
     case "♣":
     case "♠":
@@ -165,38 +171,42 @@ function updatestate(action) {
         health: getHealthAfterEnemyStrike(
           state.health,
           state.strength,
-          cardValue
+          currentCardValue
         ),
 
         strength: getStrenghtAfterEnemyStrike(
-          cardValue,
+          currentCardValue,
           state.strength,
           state.durability
         ),
-        durability: getDurabilityAfterEnemyStrike(cardValue, state.durability),
+        durability: getDurabilityAfterEnemyStrike(
+          currentCardValue,
+          state.durability
+        ),
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♥":
       return {
         ...state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
-        health: state.health + cardValue > 21 ? 21 : state.health + cardValue,
+        health:
+          state.health + currentCardValue > 21
+            ? 21
+            : state.health + currentCardValue,
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♦":
       return {
         ...state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
-        strength: cardValue,
+        strength: currentCardValue,
         durability: 21,
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "evade":
       return {
         ...state,
-        drawPile: isAllCardsInwavePlayed(state.wave)
-          ? [...state.drawPile.slice(4)]
-          : putBackUnusedCards(state.wave),
+        drawPile: getUpdatedDrawpileWhenEvade(state.wave),
         wave: [...drawCards(state.drawPile, 4)],
       };
     default:
