@@ -7,5 +7,5 @@ A basic card game for the browser based on Donsol.
 Start up a local server
 
 ```shell
-   yarn run start
+   yarn start
 ```

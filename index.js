@@ -20,7 +20,6 @@ let state = {
 };
 
 function drawGame(state) {
-  console.log(state);
   let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
 
@@ -34,7 +33,7 @@ function drawGame(state) {
 
   const actionsHTML = `<button data-button-type="evade" ${
     canEvade ? "" : "disabled"
-  } class="evade">Move on</button>`;
+  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
 
   for (const card of state.wave) {
     cards += `<button 
