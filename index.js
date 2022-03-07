@@ -130,8 +130,6 @@ function isAllCardsInwavePlayed(wave) {
 }
 
 function getDamage(brawlerStrength, opponentStrength) {
-  console.log("brawlerStrength:", typeof brawlerStrength);
-  console.log("opponentStrength:", typeof opponentStrength);
   if (opponentStrength > brawlerStrength)
     return opponentStrength - brawlerStrength;
   return 0;
