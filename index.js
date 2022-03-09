@@ -51,7 +51,9 @@ function drawGame(state) {
       </button>`;
   }
 
-  const cardHTML = `<section class="wave" section>${cards}</section>`;
+  const cardHTML = `<section class="wave" section>${
+    state.health > 0 ? cards : `<p>Knocked out</p>`
+  }</section>`;
 
   app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
 }
