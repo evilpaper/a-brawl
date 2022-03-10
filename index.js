@@ -11,13 +11,15 @@ const deck = shuffle([...playableDeck]);
 const initialwave = deck.slice(0, 4);
 const initialDrawPile = deck.slice(4);
 
-let state = {
+const initialState = {
   drawPile: [...initialDrawPile],
   wave: [...initialwave],
   health: MAX_HEALTH,
   strength: 0,
   durability: 0,
 };
+
+let state = { ...initialState };
 
 function drawGame(state) {
   let cards = "";
@@ -256,7 +258,12 @@ app.addEventListener("click", (e) => {
     }
   };
 
-  state = updatestate(action(buttonType));
+  if (buttonType === "restart") {
+    state = initialState;
+  } else {
+    state = updatestate(action(buttonType));
+  }
+
   drawGame(state);
 });
 
