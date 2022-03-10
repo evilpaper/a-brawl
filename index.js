@@ -31,10 +31,6 @@ function drawGame(state) {
     }</p>
   `;
 
-  const actionsHTML = `<button data-button-type="evade" ${
-    canEvade ? "" : "disabled"
-  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
-
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
@@ -54,6 +50,14 @@ function drawGame(state) {
   const cardHTML = `<section class="wave" section>${
     state.health > 0 ? cards : `<p>Knocked out</p>`
   }</section>`;
+
+  const evadeButton = `<button data-button-type="evade" ${
+    canEvade ? "" : "disabled"
+  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
+
+  const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
+
+  const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
   app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
 }
@@ -86,7 +90,12 @@ function getStrenghtAfterEnemyStrike(
   return currentStrength;
 }
 
-function getDurabilityAfterEnemyStrike(enemyStrength, brawlerDurability) {
+function getDurabilityAfterEnemyStrike(
+  enemyStrength,
+  brawlerStrenght,
+  brawlerDurability
+) {
+  if (brawlerStrenght === 0) return 0;
   if (brawlerDurability === 0) return enemyStrength - 1;
   if (enemyStrength >= brawlerDurability) return 0;
   if (enemyStrength < brawlerDurability) return enemyStrength - 1;
@@ -180,6 +189,7 @@ function updatestate(action) {
         ),
         durability: getDurabilityAfterEnemyStrike(
           currentCardValue,
+          state.strength,
           state.durability
         ),
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
