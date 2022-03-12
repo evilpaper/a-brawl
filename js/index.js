@@ -27,10 +27,8 @@ function drawGame(state) {
 
   const scoreboardHTML = `
     <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
-    <p>♦ Brawler defence: ${state.strength === 0 ? "-" : state.strength}</p>
-    <p>♠ ♣ Brawler stamina: ${
-      state.durability === 0 ? "-" : state.durability
-    }</p>
+    <p>♦ Defence: ${state.strength === 0 ? "-" : state.strength}</p>
+    <p>♠ ♣ Stamina: ${state.durability === 0 ? "-" : state.durability}</p>
   `;
 
   for (const card of state.wave) {

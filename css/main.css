@@ -1,3 +1,8 @@
+:root {
+  --card-width: 4rem;
+  --card-height: 5.8rem;
+}
+
 body {
   height: 100vh;
   display: flex;
@@ -11,11 +16,15 @@ body {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.4rem;
+  min-width: calc((var(--card-width) * 4) + 2rem);
+  min-height: calc(var(--card-height) + 0.2rem);
 }
 
 @media (max-width: 400px) {
   .wave {
     justify-content: center;
+    min-width: calc((var(--card-width) * 2) + 2rem);
+    min-height: calc((var(--card-height) * 2) + 0.4rem);
   }
 }
 
@@ -37,8 +46,8 @@ body {
   justify-content: space-between;
   border: 1px solid lightgrey;
   border-radius: 0.4rem;
-  min-width: 4rem;
-  min-height: 5.8rem;
+  min-width: var(--card-width);
+  min-height: var(--card-height);
   cursor: pointer;
 }
 .card:focus,
