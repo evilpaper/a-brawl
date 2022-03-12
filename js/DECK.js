@@ -1,4 +1,4 @@
-export const PLAYING_CARDS = [
+export const DECK = [
   {
     suite: "♣",
     rank: "1",

@@ -1,15 +1,15 @@
-import { PLAYING_CARDS } from "./PLAYING_CARDS.js";
+import { DECK } from "./DECK.js";
 
 const app = document.querySelector("#root");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
 
-const playableDeck = resetDeck(PLAYING_CARDS);
-const deck = shuffle([...playableDeck]);
+const playableDeck = makeDeckPlayable(DECK);
+const shuffledDeck = shuffle([...playableDeck]);
 
-const initialwave = deck.slice(0, 4);
-const initialDrawPile = deck.slice(4);
+const initialwave = shuffledDeck.slice(0, 4);
+const initialDrawPile = shuffledDeck.slice(4);
 
 const initialState = {
   drawPile: [...initialDrawPile],
@@ -30,7 +30,6 @@ function drawGame(state) {
     <p>♦ Defence: ${state.strength === 0 ? "-" : state.strength}</p>
     <p>♠ ♣ Stamina: ${state.durability === 0 ? "-" : state.durability}</p>
   `;
-
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
@@ -46,23 +45,19 @@ function drawGame(state) {
           <div class="lowerright">${card.suite}</div>
       </button>`;
   }
-
   const cardHTML = `<section class="wave" section>${
     state.health > 0 ? cards : `<p>Knocked out</p>`
   }</section>`;
-
   const evadeButton = `<button data-button-type="evade" ${
     canEvade ? "" : "disabled"
   } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
-
   const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
-
   const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
   app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
 }
 
-function resetDeck(array) {
+function makeDeckPlayable(array) {
   return array.map((item) => {
     return { ...item, played: false };
   });
