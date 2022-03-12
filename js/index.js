@@ -37,6 +37,8 @@ function drawGame(state) {
         data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}
+        style="background-image: url(${card.img}); background-repeat: no-repeat;
+        background-size: cover;"
         >
           <div class="upperleft">${card.suite}</div>
           <div>${

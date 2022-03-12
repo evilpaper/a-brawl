@@ -1,6 +1,6 @@
 :root {
-  --card-width: 4rem;
-  --card-height: 5.8rem;
+  --card-width: 8rem;
+  --card-height: 11rem;
 }
 
 body {
@@ -24,7 +24,7 @@ body {
   .wave {
     justify-content: center;
     min-width: calc((var(--card-width) * 2) + 2rem);
-    min-height: calc((var(--card-height) * 2) + 0.4rem);
+    min-height: calc((var(--card-height) * 2) + 0.2rem);
   }
 }
 
