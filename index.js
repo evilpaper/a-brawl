@@ -27,8 +27,8 @@ function drawGame(state) {
 
   const scoreboardHTML = `
     <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
-    <p>♦ Brawler strength: ${state.strength === 0 ? "-" : state.strength}</p>
-    <p>♠ ♣ Brawler durability: ${
+    <p>♦ Brawler defence: ${state.strength === 0 ? "-" : state.strength}</p>
+    <p>♠ ♣ Brawler stamina: ${
       state.durability === 0 ? "-" : state.durability
     }</p>
   `;
