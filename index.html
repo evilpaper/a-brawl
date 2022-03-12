@@ -12,20 +12,29 @@
         justify-content: center;
         align-items: center;
       }
+
       #root {
-        min-width: 19rem;
       }
+
       .wave {
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         align-items: center;
-        height: 6.6rem;
-        min-height: 6.6rem;
+        flex-wrap: wrap;
+        gap: 0.4rem;
       }
+
+      @media (max-width: 400px) {
+        .wave {
+          justify-content: center;
+        }
+      }
+
       .evade {
         width: 100%;
         border: 1px solid lightgrey;
         border-radius: 0.4rem;
+        margin-top: 1rem;
       }
       .evade:hover {
         background-color: black;
@@ -33,7 +42,6 @@
       }
       .card {
         padding: 0.4rem;
-        margin: 0.4rem 0;
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -68,7 +76,7 @@
     </style>
   </head>
   <body>
-    <section id="root" />
+    <section id="root"></section>
     <script type="module" src="./index.js"></script>
   </body>
 </html>
