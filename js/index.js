@@ -36,15 +36,8 @@ function drawGame(state) {
         data-button-type="${card.suite}"
         data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
-        ${card.played ? "disabled" : ""}
-        style="background-image: url(${card.img}); background-repeat: no-repeat;
-        background-size: cover;"
-        >
-          <div class="upperleft">${card.suite}</div>
-          <div>${
-            card.value > 10 ? card.rank + " " + card.value : card.value
-          }</div>
-          <div class="lowerright">${card.suite}</div>
+        ${card.played ? "disabled" : ""}>
+        <img src="${card.img}">
       </button>`;
   }
   const cardHTML = `<section class="wave" section>${
