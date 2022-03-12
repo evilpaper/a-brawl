@@ -1,0 +1,64 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wave {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+@media (max-width: 400px) {
+  .wave {
+    justify-content: center;
+  }
+}
+
+.evade {
+  width: 100%;
+  border: 1px solid lightgrey;
+  border-radius: 0.4rem;
+  margin-top: 1rem;
+}
+.evade:hover {
+  background-color: black;
+  color: white;
+}
+.card {
+  padding: 0.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid lightgrey;
+  border-radius: 0.4rem;
+  min-width: 4rem;
+  min-height: 5.8rem;
+  cursor: pointer;
+}
+.card:focus,
+.card:hover {
+  background-color: black;
+  color: white;
+}
+.card[disabled] {
+  pointer-events: none;
+  opacity: 0.6;
+}
+.upperleft {
+  display: flex;
+  width: 100%;
+}
+.lowerright {
+  display: flex;
+  width: 100%;
+  flex-direction: row-reverse;
+}
+.disabled {
+  pointer-events: none;
+}

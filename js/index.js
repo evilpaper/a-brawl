@@ -226,14 +226,8 @@ function updatestate(action) {
 }
 
 app.addEventListener("click", (e) => {
-  // Return immediately if the click is not on a button
   if (!e.target.closest("button")) return;
-
-  // If click is on a button, capture the button
-  // Closest is needed to capture the button in case the click is on the content
-  // in the button, like on a card symbol.
   const button = e.target.closest("button");
-  // Get the valuable stuff from the button
   const { buttonType, rank, value } = button.dataset;
 
   const action = (type) => {
