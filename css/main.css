@@ -1,16 +1,71 @@
 :root {
-  --card-width: 6rem;
-  --card-height: 8.6rem;
+  --card-width: 4rem;
+  --card-height: 5.7rem;
 }
 
 /* 242 * 340 */
+
+/* A MINIMAL RESET */
+
+html {
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h5,
+p,
+ol,
+ul,
+button {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 1rem;
+  font-family: "Poppins", sans-serif;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+  outline: none;
+}
 
 body {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
 }
+
+.board {
+  width: 96%;
+  height: 50%;
+}
+
 .wave {
   display: flex;
   justify-content: space-around;
@@ -29,6 +84,8 @@ body {
   border: none;
   border-radius: 0.6rem;
   cursor: pointer;
+  width: 24%;
+  height: auto;
 }
 .card:focus,
 .card:hover {

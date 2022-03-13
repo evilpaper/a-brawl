@@ -1,6 +1,6 @@
 import { DECK } from "./DECK.js";
 
-const app = document.querySelector("#root");
+const app = document.querySelector("#board");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
@@ -25,11 +25,11 @@ function drawGame(state) {
   let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
 
-  const scoreboardHTML = `
-    <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
-    <p>♦ Defence: ${state.strength === 0 ? "-" : state.strength}</p>
-    <p>♠ ♣ Stamina: ${state.durability === 0 ? "-" : state.durability}</p>
-  `;
+  // const scoreboardHTML = `
+  //   <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
+  //   <p>♦ Defence: ${state.strength === 0 ? "-" : state.strength}</p>
+  //   <p>♠ ♣ Stamina: ${state.durability === 0 ? "-" : state.durability}</p>
+  // `;
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
@@ -49,7 +49,7 @@ function drawGame(state) {
   const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
   const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
-  app.innerHTML = scoreboardHTML + cardHTML + actionsHTML;
+  app.innerHTML = cardHTML + actionsHTML;
 }
 
 function makeDeckPlayable(array) {
