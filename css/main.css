@@ -66,6 +66,15 @@ body {
   height: 50%;
 }
 
+.health,
+.defence,
+.stamina {
+  display: inline-block;
+  width: 1rem;
+  min-width: 1rem;
+  margin-right: 2rem;
+}
+
 .wave {
   display: flex;
   justify-content: space-around;

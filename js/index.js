@@ -1,6 +1,9 @@
 import { DECK } from "./DECK.js";
 
 const app = document.querySelector("#board");
+const healthDisplay = document.querySelector(".health");
+const defenceDisplay = document.querySelector(".defence");
+const staminaDisplay = document.querySelector(".stamina");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
@@ -49,6 +52,9 @@ function drawGame(state) {
   const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
   const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
+  healthDisplay.innerHTML = state.health;
+  defenceDisplay.innerHTML = state.strength;
+  staminaDisplay.innerHTML = state.durability;
   app.innerHTML = cardHTML + actionsHTML;
 }
 
