@@ -4,6 +4,27 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/fonts/poppins-v19-latin-700.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/poppins-v19-latin-700italic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/poppins-v19-latin-900italic.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
     <title>A Brawl</title>
     <link rel="stylesheet" href="/css/main.css" />
   </head>
@@ -13,21 +34,22 @@
     </p> -->
     <section class="tracker">
       <span class="cell">
-        <span class="label"
-          ><p>Health</p>
-          <p>♥</p></span
-        ><span class="health">X</span>
+        <span class="label"><p>Health</p> </span
+        ><span class="value"
+          ><p class="health">X</p>
+          <p class="suite">♥</p></span
+        >
       </span>
       <span class="cell">
         <span class="label"
           ><p>Defence</p>
-          <p>♦</p></span
+          <p class="suite">♦</p></span
         ><span class="defence">Y</span>
       </span>
       <span class="cell">
         <span class="label"
           ><p>Stamina</p>
-          <p>♠♣</p></span
+          <p class="suite">♠♣</p></span
         ><span class="stamina">Z</span>
       </span>
     </section>
