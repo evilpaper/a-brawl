@@ -66,6 +66,17 @@ body {
   height: 50%;
 }
 
+.tracker {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.cell {
+  display: flex;
+  flex-direction: column;
+}
+
 .health,
 .defence,
 .stamina {
