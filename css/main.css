@@ -72,6 +72,12 @@ body {
   width: 100%;
 }
 
+.label {
+  width: 7rem;
+  display: flex;
+  justify-content: space-between;
+}
+
 .cell {
   display: flex;
   flex-direction: column;
