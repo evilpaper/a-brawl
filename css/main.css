@@ -80,6 +80,7 @@ body {
   flex-direction: column;
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, avenir next, avenir,
     segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  padding: 1rem;
 }
 
 .board {
@@ -89,12 +90,13 @@ body {
 
 .tracker {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   width: 100%;
+  margin-bottom: 0.6rem;
 }
 
 .label {
-  width: 7rem;
+  width: 6rem;
   display: flex;
   justify-content: space-between;
   font-weight: 700;
@@ -102,7 +104,6 @@ body {
 }
 
 .value {
-  width: 7rem;
   display: flex;
 }
 
@@ -115,16 +116,19 @@ body {
 .defence,
 .stamina {
   display: inline-block;
-  width: 1rem;
-  min-width: 1rem;
-  margin-right: 2rem;
+  width: 2rem;
+  min-width: 2rem;
+  margin-right: 0.4rem;
   font-weight: 900;
   font-size: 2rem;
   font-style: italic;
+  line-height: 2rem;
 }
 
 .suite {
   font-style: normal;
+  display: flex;
+  align-items: flex-end;
 }
 
 .wave {
