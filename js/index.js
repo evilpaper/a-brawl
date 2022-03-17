@@ -214,8 +214,21 @@ function updatestate(action) {
         drawPile: getUpdatedDrawpileWhenEvade(state.wave),
         wave: [...drawCards(state.drawPile, 4)],
       };
+    case "restart":
+      const shuffledDeck = shuffle([...playableDeck]);
+      const initialwave = shuffledDeck.slice(0, 4);
+      const initialDrawPile = shuffledDeck.slice(4);
+      return {
+        drawPile: [...initialDrawPile],
+        wave: [...initialwave],
+        health: MAX_HEALTH,
+        strength: 0,
+        durability: 0,
+      };
     default:
-      return state;
+      return {
+        ...state,
+      };
   }
 }
 
@@ -246,11 +259,7 @@ app.addEventListener("click", (e) => {
     }
   };
 
-  if (buttonType === "restart") {
-    state = initialState;
-  } else {
-    state = updatestate(action(buttonType));
-  }
+  state = updatestate(action(buttonType));
 
   drawGame(state);
 });
