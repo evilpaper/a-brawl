@@ -81,6 +81,7 @@ body {
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, avenir next, avenir,
     segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
   padding: 1rem;
+  background-color: black;
 }
 
 .board {
@@ -93,6 +94,7 @@ body {
   justify-content: flex-start;
   width: 100%;
   margin-bottom: 0.6rem;
+  color: aliceblue;
 }
 
 .label {
@@ -163,6 +165,7 @@ body {
 }
 .card img {
   width: 100%;
+  border-radius: 0.6rem;
 }
 
 .card img:hover {
