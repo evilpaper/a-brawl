@@ -76,8 +76,7 @@ body {
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  align-items: flex-start;
   font-family: "Poppins", -apple-system, BlinkMacSystemFont, avenir next, avenir,
     segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
   padding: 1rem;
@@ -93,7 +92,7 @@ body {
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  margin-bottom: 0.6rem;
+  margin-bottom: 1rem;
   color: aliceblue;
 }
 
@@ -132,7 +131,6 @@ body {
   display: flex;
   align-items: flex-end;
 }
-
 .wave {
   display: flex;
   justify-content: space-around;
@@ -182,12 +180,6 @@ body {
   background-color: black;
   color: white;
 }
-
-@media (max-width: 400px) {
-  .wave {
-    justify-content: center;
-  }
-}
 .upperleft {
   display: flex;
   width: 100%;
@@ -199,4 +191,13 @@ body {
 }
 .disabled {
   pointer-events: none;
+}
+
+@media (max-width: 400px) {
+  .wave {
+    justify-content: center;
+  }
+  .card {
+    width: 48%;
+  }
 }
