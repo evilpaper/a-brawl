@@ -136,12 +136,12 @@ main {
   flex-wrap: wrap;
   flex-grow: 1;
   gap: 0.4rem;
+  color: white;
 }
 
 .board {
-  width: 32rem;
-  height: 11rem;
-  border: 1px solid magenta;
+  width: 48rem;
+  height: 16rem;
 }
 .card {
   margin: 0;
@@ -185,6 +185,8 @@ main {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-weight: 300;
   font-style: italic;
+  float: right;
+  font-size: 0.8rem;
 }
 .evade:hover {
   background-color: white;

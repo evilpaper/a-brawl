@@ -40,7 +40,7 @@ function drawGame(state) {
         data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
         ${card.played ? "disabled" : ""}>
-        <img src="${card.img}">
+        <img src="${card.img}" width="242px" height="320px">
       </button>`;
   }
   const cardHTML = `<section class="wave" section>${
