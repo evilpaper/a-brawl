@@ -98,8 +98,12 @@ main {
   width: 6rem;
   display: flex;
   justify-content: space-between;
-  font-weight: 700;
+}
+
+.label p {
+  font-size: 0.7rem;
   font-style: italic;
+  font-weight: 700;
 }
 
 .value {
@@ -117,7 +121,7 @@ main {
   display: inline-block;
   width: 2rem;
   min-width: 2rem;
-  margin-right: 0.4rem;
+  margin-right: 0.6rem;
   font-weight: 900;
   font-size: 2rem;
   font-style: italic;
@@ -127,7 +131,8 @@ main {
 .suite {
   font-style: normal;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
+  font-size: 0.8rem;
 }
 .wave {
   display: flex;
