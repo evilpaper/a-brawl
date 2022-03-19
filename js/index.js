@@ -46,16 +46,16 @@ function drawGame(state) {
   const cardHTML = `<section class="wave" section>${
     state.health > 0 ? cards : `<p>Knocked out</p>`
   }</section>`;
-  const evadeButton = `<button data-button-type="evade" ${
-    canEvade ? "" : "disabled"
-  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
-  const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
-  const actionsHTML = state.health > 0 ? evadeButton : restartButton;
+  // const evadeButton = `<button data-button-type="evade" ${
+  //   canEvade ? "" : "disabled"
+  // } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
+  // const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
+  // const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
   healthDisplay.innerHTML = state.health;
   defenceDisplay.innerHTML = state.strength;
   staminaDisplay.innerHTML = state.durability;
-  app.innerHTML = cardHTML + actionsHTML;
+  app.innerHTML = cardHTML;
 }
 
 function makeDeckPlayable(array) {
@@ -259,6 +259,7 @@ app.addEventListener("click", (e) => {
     }
   };
 
+  console.log("Hello");
   state = updatestate(action(buttonType));
 
   drawGame(state);
