@@ -28,12 +28,6 @@ let state = { ...initialState };
 function drawGame(state) {
   let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
-
-  // const scoreboardHTML = `
-  //   <p>♥ Health: ${state.health} / ${MAX_HEALTH}</p>
-  //   <p>♦ Defence: ${state.strength === 0 ? "-" : state.strength}</p>
-  //   <p>♠ ♣ Stamina: ${state.durability === 0 ? "-" : state.durability}</p>
-  // `;
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
@@ -175,13 +169,13 @@ function updatestate(action) {
     case "♠":
       return {
         ...state,
+        previousState: state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         health: getHealthAfterEnemyStrike(
           state.health,
           state.strength,
           currentCardValue
         ),
-
         strength: getStrenghtAfterEnemyStrike(
           currentCardValue,
           state.strength,
@@ -197,6 +191,7 @@ function updatestate(action) {
     case "♥":
       return {
         ...state,
+        previousState: state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         health:
           state.health + currentCardValue > 21
@@ -207,6 +202,7 @@ function updatestate(action) {
     case "♦":
       return {
         ...state,
+        previousState: state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
         strength: currentCardValue,
         durability: 21,
@@ -215,6 +211,7 @@ function updatestate(action) {
     case "evade":
       return {
         ...state,
+        previousState: state,
         drawPile: getUpdatedDrawpileWhenEvade(state.wave),
         wave: [...drawCards(state.drawPile, 4)],
       };
@@ -236,36 +233,46 @@ function updatestate(action) {
   }
 }
 
+const action = (type, cardRank, cardValue) => {
+  switch (type) {
+    case "♣":
+    case "♠":
+    case "♥":
+    case "♦":
+      return {
+        type: type,
+        rank: cardRank,
+        value: cardValue,
+      };
+    case "evade":
+      return {
+        type: type,
+      };
+    case "restart":
+      return {
+        type: type,
+      };
+    default:
+      return {
+        type: type,
+      };
+  }
+};
+
 board.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
   const { buttonType, rank, value } = button.dataset;
-
-  const action = (type) => {
-    switch (type) {
-      case "♣":
-      case "♠":
-      case "♥":
-      case "♦":
-        return {
-          type: type,
-          rank: rank,
-          value: value,
-        };
-      case "evade":
-        return {
-          type: type,
-        };
-      default:
-        return {
-          type: type,
-        };
-    }
-  };
-  state = updatestate(action(buttonType));
+  state = updatestate(action(buttonType, rank, value));
+  console.log(state);
   drawGame(state);
 });
 
-actionButton.addEventListener("click", (e) => {});
+actionButton.addEventListener("click", (e) => {
+  const button = e.target.closest("button");
+  const { buttonType } = button.dataset;
+  state = updatestate(action(buttonType));
+  drawGame(state);
+});
 
 drawGame(state);

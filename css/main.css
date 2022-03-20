@@ -174,10 +174,18 @@ main {
   width: 100%;
   border-radius: 0.6rem;
 }
-
 .card img:hover {
   opacity: 0.8;
 }
+
+/* @keyframes fadein {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+} */
 
 .action-button {
   padding: 0.2rem 1rem;
