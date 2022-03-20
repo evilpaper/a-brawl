@@ -1,9 +1,10 @@
 import { DECK } from "./DECK.js";
 
-const app = document.querySelector("#board");
+const board = document.querySelector("#board");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
+const actionButton = document.querySelector(".action-button");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
@@ -46,16 +47,19 @@ function drawGame(state) {
   const cardHTML = `<section class="wave" section>${
     state.health > 0 ? cards : `<p>Knocked out</p>`
   }</section>`;
-  // const evadeButton = `<button data-button-type="evade" ${
-  //   canEvade ? "" : "disabled"
-  // } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
-  // const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
-  // const actionsHTML = state.health > 0 ? evadeButton : restartButton;
+
+  const evadeButton = `<button data-button-type="evade" ${
+    canEvade ? "" : "disabled"
+  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
+  const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
+
+  const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
   healthDisplay.innerHTML = state.health;
   defenceDisplay.innerHTML = state.strength;
   staminaDisplay.innerHTML = state.durability;
-  app.innerHTML = cardHTML;
+  actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
+  board.innerHTML = cardHTML;
 }
 
 function makeDeckPlayable(array) {
@@ -232,7 +236,7 @@ function updatestate(action) {
   }
 }
 
-app.addEventListener("click", (e) => {
+board.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
   const { buttonType, rank, value } = button.dataset;
@@ -258,11 +262,10 @@ app.addEventListener("click", (e) => {
         };
     }
   };
-
-  console.log("Hello");
   state = updatestate(action(buttonType));
-
   drawGame(state);
 });
+
+actionButton.addEventListener("click", (e) => {});
 
 drawGame(state);
