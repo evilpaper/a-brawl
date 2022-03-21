@@ -49,9 +49,24 @@ function drawGame(state) {
 
   const actionsHTML = state.health > 0 ? evadeButton : restartButton;
 
-  healthDisplay.innerHTML = state.health;
-  defenceDisplay.innerHTML = state.strength;
-  staminaDisplay.innerHTML = state.durability;
+  // Only update if needed
+  if (state.previousState) {
+    if (state.previousState.health !== state.health) {
+      healthDisplay.innerHTML = state.health;
+    }
+    if (state.previousState.strength !== state.strength) {
+      defenceDisplay.innerHTML = state.strength;
+    }
+    if (state.previousState.stamina !== state.stamina) {
+      staminaDisplay.innerHTML = state.stamina;
+    }
+  } else {
+    // First paint, when we don't have a previous state
+    healthDisplay.innerHTML = state.health;
+    defenceDisplay.innerHTML = state.strength;
+    staminaDisplay.innerHTML = state.durability;
+  }
+
   actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
   board.innerHTML = cardHTML;
 }
