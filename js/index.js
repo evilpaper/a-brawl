@@ -1,5 +1,6 @@
 import { DECK } from "./DECK.js";
 
+const app = document.querySelector(".app");
 const board = document.querySelector("#board");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
@@ -274,19 +275,11 @@ const action = (type, cardRank, cardValue) => {
   }
 };
 
-board.addEventListener("click", (e) => {
+app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
   const { buttonType, rank, value } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
-  console.log(state);
-  drawGame(state);
-});
-
-actionButton.addEventListener("click", (e) => {
-  const button = e.target.closest("button");
-  const { buttonType } = button.dataset;
-  state = updatestate(action(buttonType));
   drawGame(state);
 });
 
