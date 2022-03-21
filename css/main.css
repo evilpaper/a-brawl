@@ -142,6 +142,7 @@ main {
   flex-grow: 1;
   gap: 0.4rem;
   color: white;
+  min-height: 100%;
 }
 .board {
   width: 48rem;
@@ -160,16 +161,6 @@ main {
   width: 24%;
   height: auto;
 }
-
-@media (max-width: 599px) and (orientation: portrait) {
-  .board {
-    width: 100vw;
-    height: 80vh;
-  }
-  .card {
-    width: 48%;
-  }
-}
 .card:focus,
 .card:hover {
   background-color: black;
@@ -187,6 +178,16 @@ main {
   opacity: 0.8;
 }
 
+@media (max-width: 599px) and (orientation: portrait) {
+  .board {
+    width: 100vw;
+    height: 80vh;
+  }
+  .card {
+    width: 48%;
+  }
+}
+
 /* @keyframes fadein {
   from {
     opacity: 0;
@@ -195,6 +196,10 @@ main {
     opacity: 1;
   }
 } */
+
+.game-over {
+  font-style: italic;
+}
 
 .action-button {
   padding: 0.2rem 1rem;
@@ -211,11 +216,12 @@ main {
   background-color: white;
   color: black;
 }
-
-.disabled {
+.disabled,
+.disabled:hover {
   pointer-events: none;
-  border-color: slategrey;
-  color: slategrey;
+  background-color: transparent;
+  border-color: darkgrey;
+  color: darkgrey;
 }
 
 @media (max-width: 400px) {

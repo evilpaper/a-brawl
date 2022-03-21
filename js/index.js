@@ -40,15 +40,16 @@ function drawGame(state) {
       </button>`;
   }
   const cardHTML = `<section class="wave" section>${
-    state.health > 0 ? cards : `<p>Knocked out</p>`
+    state.health > 0 ? cards : `<p class="game-over">Knocked out</p>`
   }</section>`;
 
-  const evadeButton = `<button data-button-type="evade" ${
-    canEvade ? "" : "disabled"
-  } class="evade ${canEvade ? "" : "disabled"}">Move on</button>`;
-  const restartButton = `<button data-button-type="restart" class="evade">Play again</button>`;
-
-  const actionsHTML = state.health > 0 ? evadeButton : restartButton;
+  if (canEvade) {
+    actionButton.classList.remove("disabled");
+  } else {
+    actionButton.classList.add("disabled");
+  }
+  actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
+  actionButton.dataset.buttonType = state.health > 0 ? "evade" : "restart";
 
   // Only update if needed
   if (state.previousState) {
@@ -68,7 +69,6 @@ function drawGame(state) {
     staminaDisplay.innerHTML = state.durability;
   }
 
-  actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
   board.innerHTML = cardHTML;
 }
 
