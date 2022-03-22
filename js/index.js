@@ -1,7 +1,7 @@
 import { DECK } from "./DECK.js";
 
 const app = document.querySelector(".app");
-const board = document.querySelector("#board");
+const board = document.querySelector(".board");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
@@ -29,6 +29,7 @@ let state = { ...initialState };
 function drawGame(state) {
   let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
+  const canRestart = state.health === 0;
   for (const card of state.wave) {
     cards += `<button 
         class="card ${card.played ? "played" : ""}" 
@@ -39,11 +40,11 @@ function drawGame(state) {
         <img src="${card.img}" width="242px" height="320px">
       </button>`;
   }
-  const cardHTML = `<section class="wave" section>${
+  const cardHTML = `${
     state.health > 0 ? cards : `<p class="game-over">Knocked out</p>`
-  }</section>`;
+  }`;
 
-  if (canEvade) {
+  if (canEvade || canRestart) {
     actionButton.classList.remove("disabled");
   } else {
     actionButton.classList.add("disabled");
@@ -59,8 +60,8 @@ function drawGame(state) {
     if (state.previousState.strength !== state.strength) {
       defenceDisplay.innerHTML = state.strength;
     }
-    if (state.previousState.stamina !== state.stamina) {
-      staminaDisplay.innerHTML = state.stamina;
+    if (state.previousState.durability !== state.durability) {
+      staminaDisplay.innerHTML = state.durability;
     }
   } else {
     // First paint, when we don't have a previous state
@@ -281,6 +282,11 @@ app.addEventListener("click", (e) => {
   const { buttonType, rank, value } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
+});
+
+window.addEventListener("load", function () {
+  board.style.height = `${board.clientHeight}px`;
+  board.style.width = `${board.clientWidth}px`;
 });
 
 drawGame(state);
