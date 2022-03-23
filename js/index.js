@@ -284,9 +284,9 @@ app.addEventListener("click", (e) => {
   drawGame(state);
 });
 
-window.addEventListener("load", function () {
-  board.style.height = `${board.clientHeight}px`;
-  board.style.width = `${board.clientWidth}px`;
-});
+// window.addEventListener("load", function () {
+//   board.style.height = `${board.clientHeight}px`;
+//   board.style.width = `${board.clientWidth}px`;
+// });
 
 drawGame(state);

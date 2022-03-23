@@ -84,6 +84,8 @@ body {
 
 main {
   padding: 0.4rem;
+  padding: 1rem;
+  max-width: 56rem;
 }
 
 .tracker {
@@ -133,18 +135,21 @@ main {
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 0.6rem;
+  aspect-ratio: 3 / 1;
 }
 
 .card {
-  display: block;
-  width: 100%;
-  height: auto;
   margin: 0;
   padding: 0;
   border: none;
   border-radius: 0.6rem;
   cursor: pointer;
   transition: all 0.2s ease-out;
+  aspect-ratio: 242 / 320;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
 }
 
 .card:focus,
@@ -159,8 +164,6 @@ main {
 }
 
 .card img {
-  width: 100%;
-  height: 100%;
   border-radius: 0.6rem;
   transition: all 0.2s ease-out;
 }
@@ -186,7 +189,6 @@ main {
   }
   .card {
     width: 24%;
-    margin: 0.4%;
   }
 }
 
@@ -197,7 +199,6 @@ main {
   }
   .card {
     width: 24%;
-    margin: 0.4%;
   }
 }
 
@@ -249,23 +250,16 @@ main {
   float: right;
   font-size: 0.7rem;
 }
+
 .action-button:hover {
   background-color: white;
   color: black;
 }
+
 .disabled,
 .disabled:hover {
   pointer-events: none;
   background-color: transparent;
   border-color: dimgrey;
   color: dimgrey;
-}
-
-@media (max-width: 400px) {
-  .wave {
-    justify-content: center;
-  }
-  .card {
-    width: 48%;
-  }
 }
