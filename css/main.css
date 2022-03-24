@@ -22,8 +22,6 @@
   font-style: italic;
 }
 
-/* 242 * 340 */
-
 /* A MINIMAL RESET */
 
 html {
@@ -174,6 +172,9 @@ main {
 
 /* Phone portrait only*/
 @media (max-width: 599px) and (orientation: portrait) {
+  body {
+    align-items: flex-start;
+  }
   .board {
     align-content: flex-start;
   }
@@ -194,6 +195,9 @@ main {
 
 /* Tablet portrait only */
 @media (min-width: 600px) and (orientation: portrait) {
+  body {
+    align-items: flex-start;
+  }
   .board {
     align-content: flex-start;
   }
@@ -260,6 +264,7 @@ main {
 .disabled:hover {
   pointer-events: none;
   background-color: transparent;
-  border-color: dimgrey;
-  color: dimgrey;
+  border-color: hsla(0, 100%, 100%, 0.6);
+  color: hsla(0, 100%, 100%, 0.5);
+  text-decoration: line-through;
 }
