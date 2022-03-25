@@ -179,6 +179,12 @@ function putBackUnusedCards(wave) {
   return [...state.drawPile, ...cards].slice(4);
 }
 
+function getUpdatedHealthAfterPickingAHealth(incoming, current) {
+  // TODO: add logic for not being able to pick to hearts in a row
+  if (current + incoming > 21) return 21;
+  return current + incoming;
+}
+
 function updatestate(action) {
   const currentCardValue = Number(action.value);
   switch (action.type) {
@@ -210,10 +216,10 @@ function updatestate(action) {
         ...state,
         previousState: state,
         drawPile: getUpdatedDrawpile(state.wave, state.drawPile),
-        health:
-          state.health + currentCardValue > 21
-            ? 21
-            : state.health + currentCardValue,
+        health: getUpdatedHealthAfterPickingAHealth(
+          currentCardValue,
+          state.health
+        ),
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
       };
     case "♦":
