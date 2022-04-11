@@ -4,22 +4,38 @@
 }
 
 @font-face {
-  font-family: "Poppins";
-  src: url("../fonts/poppins-v19-latin-700.woff2") format("woff2");
+  font-family: "Whyte Inktrap Regular";
   font-style: normal;
-  font-weight: 700;
+  font-weight: normal;
+  src: url("/fonts/ABCWhyteInktrap-Regular.woff2") format("woff2");
 }
+
 @font-face {
-  font-family: "Poppins";
-  src: url("/fonts/poppins-v19-latin-700italic.woff2") format("woff2");
-  font-weight: 700;
-  font-style: italic;
+  font-family: "Whyte Inktrap Medium";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/fonts/ABCWhyteInktrap-Medium.woff2") format("woff2");
 }
+
 @font-face {
-  font-family: "Poppins";
-  src: url("/fonts/poppins-v19-latin-900italic.woff2") format("woff2");
-  font-weight: 900;
-  font-style: italic;
+  font-family: "Whyte Inktrap Bold";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/fonts/ABCWhyteInktrap-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Whyte Inktrap Book";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/fonts/ABCWhyteInktrap-Book.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Whyte Inktrap Heavy";
+  font-style: normal;
+  font-weight: bold;
+  src: url("/fonts/ABCWhyteInktrap-Heavy.woff2") format("woff2");
 }
 
 /* A MINIMAL RESET */
@@ -50,7 +66,7 @@ button {
   padding: 0;
   font-weight: normal;
   font-size: 1rem;
-  font-family: "Poppins", sans-serif;
+  font-family: "Whyte Inktrap Regular", sans-serif;
 }
 
 ol,
@@ -75,15 +91,15 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Poppins", -apple-system, BlinkMacSystemFont, avenir next, avenir,
-    segoe ui, helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  font-family: "Whyte Inktrap Regular", -apple-system, BlinkMacSystemFont,
+    avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto,
+    noto, arial, sans-serif;
   background-color: black;
 }
 
 main {
   padding: 0.4rem;
   padding: 1rem;
-  max-width: 56rem;
 }
 
 .tracker {
@@ -101,9 +117,7 @@ main {
 }
 
 .label p {
-  font-size: 0.7rem;
-  font-style: italic;
-  font-weight: 700;
+  font-size: 0.9rem;
 }
 
 .value {
@@ -122,18 +136,24 @@ main {
   width: 2rem;
   min-width: 2rem;
   margin-right: 0.6rem;
-  font-weight: 900;
   font-size: 2rem;
-  font-style: italic;
   line-height: 2rem;
+  font-family: "Whyte Inktrap Heavy";
+  font-weight: bold;
 }
 
 .board {
-  display: flex;
+  /* display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   gap: 0.6rem;
-  aspect-ratio: 3 / 1;
+  aspect-ratio: 3 / 1; */
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(1, auto);
+  gap: 1rem;
+  justify-content: center;
+  border: 1px solid yellow;
 }
 
 .card {
@@ -143,11 +163,11 @@ main {
   border-radius: 0.6rem;
   cursor: pointer;
   transition: all 0.2s ease-out;
-  aspect-ratio: 242 / 320;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  border: 1px solid magenta;
 }
 
 .card:focus,
@@ -176,25 +196,23 @@ main {
     align-items: flex-start;
   }
   .board {
-    align-content: flex-start;
-  }
-  .card {
-    width: 48%;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
   }
 }
 
 /* Phone landscape only */
-@media (max-width: 599px) and (orientation: landscape) {
+/* @media (max-width: 599px) and (orientation: landscape) {
   .board {
     align-content: flex-start;
   }
   .card {
     width: 24%;
   }
-}
+} */
 
 /* Tablet portrait only */
-@media (min-width: 600px) and (orientation: portrait) {
+/* @media (min-width: 600px) and (orientation: portrait) {
   body {
     align-items: flex-start;
   }
@@ -204,10 +222,10 @@ main {
   .card {
     width: 24%;
   }
-}
+} */
 
 /* Tablet and up */
-@media (min-width: 900px) {
+/* @media (min-width: 900px) {
   body {
     height: 100vh;
     align-items: center;
@@ -222,7 +240,7 @@ main {
   .card {
     width: 24%;
   }
-}
+} */
 
 /* @keyframes fadein {
   from {

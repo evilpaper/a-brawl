@@ -2,6 +2,14 @@ import { DECK } from "./DECK.js";
 
 const app = document.querySelector(".app");
 const board = document.querySelector(".board");
+const slot1 = document.querySelector(".slot1");
+const slot2 = document.querySelector(".slot2");
+const slot3 = document.querySelector(".slot3");
+const slot4 = document.querySelector(".slot4");
+const position1 = document.querySelector("#position1");
+const position2 = document.querySelector("#position2");
+const position3 = document.querySelector("#position3");
+const position4 = document.querySelector("#position4");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
@@ -30,9 +38,17 @@ function drawGame(state) {
   let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
+
+  // slot1.innerHTML = `<img src="${state.wave[0].img}" width="242px" height="320px">`;
+  // slot2.innerHTML = `<img src="${state.wave[1].img}" width="242px" height="320px">`;
+  // slot3.innerHTML = `<img src="${state.wave[2].img}" width="242px" height="320px">`;
+  // slot4.innerHTML = `<img src="${state.wave[3].img}" width="242px" height="320px">`;
+
+  console.log(state.previousState);
+
   for (const card of state.wave) {
-    cards += `<button 
-        class="card ${card.played ? "played" : ""}" 
+    cards += `<button
+        class="card ${card.played ? "played" : ""}"
         data-button-type="${card.suite}"
         data-value="${card.value}"
         data-suite="${card.suite}" data-rank="${card.rank}"
@@ -40,6 +56,7 @@ function drawGame(state) {
         <img src="${card.img}" width="242px" height="320px">
       </button>`;
   }
+
   const cardHTML = `${
     state.health > 0 ? cards : `<p class="game-over">Knocked out</p>`
   }`;
@@ -285,7 +302,8 @@ const action = (type, cardRank, cardValue) => {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  const { buttonType, rank, value } = button.dataset;
+  const { buttonType, rank, value, slot } = button.dataset;
+  console.log(buttonType, rank, value, slot);
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
 });

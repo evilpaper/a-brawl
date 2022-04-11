@@ -6,21 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="preload"
-      href="/fonts/poppins-v19-latin-700.woff2"
+      href="/fonts/ABCWhyteInktrap-Regular.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/poppins-v19-latin-700italic.woff2"
-      as="font"
-      type="font/woff2"
-      crossorigin
-    />
-    <link
-      rel="preload"
-      href="/fonts/poppins-v19-latin-900italic.woff2"
+      href="/fonts/ABCWhyteInktrap-Heavy.woff2"
       as="font"
       type="font/woff2"
       crossorigin
@@ -54,10 +47,28 @@
         </span>
       </section>
       <section class="board">
-        <button class="card">
-          <img src="./images/clover-2.jpg" width="242px" height="320px" />
-        </button>
+        <div id="position1">
+          <button class="card slot1" data-slot="one">
+            <img src="./images/clover-2.jpg" width="242px" height="320px" />
+          </button>
+        </div>
+        <div id="position2">
+          <button class="card slot2" data-slot="two">
+            <img src="./images/clover-2.jpg" width="242px" height="320px" />
+          </button>
+        </div>
+        <div id="position3">
+          <button class="card slot3" data-slot="three">
+            <img src="./images/clover-2.jpg" width="242px" height="320px" />
+          </button>
+        </div>
+        <div id="position4">
+          <button class="card slot4" data-slot="four">
+            <img src="./images/clover-2.jpg" width="242px" height="320px" />
+          </button>
+        </div>
       </section>
+
       <button class="action-button disabled" data-button-type="evade">
         Move on
       </button>
