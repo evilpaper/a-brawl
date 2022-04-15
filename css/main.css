@@ -110,23 +110,12 @@ main {
 }
 
 .label {
-  width: 6rem;
-  display: flex;
-  justify-content: space-between;
-  padding-bottom: 0.4rem;
-}
-
-.label p {
-  font-size: 0.9rem;
-}
-
-.value {
-  display: flex;
-}
-
-.cell {
-  display: flex;
-  flex-direction: column;
+  font-size: 1.4rem;
+  color: hsla(0, 0%, 100%, 0.6);
+  font-family: -apple-system, BlinkMacSystemFont, avenir next, avenir, segoe ui,
+    helvetica neue, helvetica, Ubuntu, roboto, noto, arial, sans-serif;
+  font-weight: 100;
+  font-style: italic;
 }
 
 .health,
@@ -135,11 +124,11 @@ main {
   display: inline-block;
   width: 2rem;
   min-width: 2rem;
+  margin-left: 0.4rem;
   margin-right: 0.6rem;
-  font-size: 2rem;
-  line-height: 2rem;
   font-family: "Whyte Inktrap Heavy";
   font-weight: bold;
+  font-size: 1.4rem;
 }
 
 .board {
@@ -153,7 +142,7 @@ main {
   grid-template-rows: repeat(1, auto);
   gap: 1rem;
   justify-content: center;
-  border: 1px solid yellow;
+  position: relative;
 }
 
 .card {
@@ -167,7 +156,6 @@ main {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 1px solid magenta;
 }
 
 .card:focus,
@@ -252,13 +240,15 @@ main {
 } */
 
 .game-over {
+  position: absolute;
   font-style: italic;
   color: white;
   width: 100%;
   height: 100%;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
+  background-color: hsla(0, 0%, 0%, 0.8);
 }
 
 .action-button {

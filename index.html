@@ -24,51 +24,28 @@
   <body style="position: relative">
     <main class="app">
       <section class="tracker">
-        <span class="cell">
-          <span class="label"><p>Health</p></span>
-          <span class="value">
-            <p class="health">-</p>
-            <!-- <p class="suite">♥</p> -->
-          </span>
-        </span>
-        <span class="cell">
-          <span class="label"><p>Defence</p></span>
-          <span class="value">
-            <p class="defence">-</p>
-            <!-- <p class="suite">♦</p> -->
-          </span>
-        </span>
-        <span class="cell">
-          <span class="label"><p>Stamina</p></span>
-          <span class="value">
-            <p class="stamina">-</p>
-            <!-- <p class="suite">♠♣</p> -->
-          </span>
-        </span>
+        <p class="label">Health</p>
+        <p class="health">-</p>
+        <p class="label">Defence</p>
+        <p class="defence">-</p>
+        <p class="label">Stamina</p>
+        <p class="stamina">-</p>
       </section>
       <section class="board">
-        <div id="position1">
-          <button class="card slot1" data-slot="one">
-            <img src="./images/clover-2.jpg" width="242px" height="320px" />
-          </button>
-        </div>
-        <div id="position2">
-          <button class="card slot2" data-slot="two">
-            <img src="./images/clover-2.jpg" width="242px" height="320px" />
-          </button>
-        </div>
-        <div id="position3">
-          <button class="card slot3" data-slot="three">
-            <img src="./images/clover-2.jpg" width="242px" height="320px" />
-          </button>
-        </div>
-        <div id="position4">
-          <button class="card slot4" data-slot="four">
-            <img src="./images/clover-2.jpg" width="242px" height="320px" />
-          </button>
-        </div>
+        <button class="card slot1" data-slot="one">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <button class="card slot2" data-slot="two">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <button class="card slot3" data-slot="three">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <button class="card slot4" data-slot="four">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <p class="game-over">Knocked out</p>
       </section>
-
       <button class="action-button disabled" data-button-type="evade">
         Move on
       </button>

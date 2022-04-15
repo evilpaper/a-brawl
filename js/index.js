@@ -2,14 +2,11 @@ import { DECK } from "./DECK.js";
 
 const app = document.querySelector(".app");
 const board = document.querySelector(".board");
+const gameOverOverlay = document.querySelector(".game-over");
 const slot1 = document.querySelector(".slot1");
 const slot2 = document.querySelector(".slot2");
 const slot3 = document.querySelector(".slot3");
 const slot4 = document.querySelector(".slot4");
-const position1 = document.querySelector("#position1");
-const position2 = document.querySelector("#position2");
-const position3 = document.querySelector("#position3");
-const position4 = document.querySelector("#position4");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
@@ -39,27 +36,90 @@ function drawGame(state) {
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
 
-  // slot1.innerHTML = `<img src="${state.wave[0].img}" width="242px" height="320px">`;
-  // slot2.innerHTML = `<img src="${state.wave[1].img}" width="242px" height="320px">`;
-  // slot3.innerHTML = `<img src="${state.wave[2].img}" width="242px" height="320px">`;
-  // slot4.innerHTML = `<img src="${state.wave[3].img}" width="242px" height="320px">`;
+  console.log("Previous state is:", state.previousState);
+  console.log("Current state is:", state);
 
-  console.log(state.previousState);
+  // slot1.innerHTML = `
+  // <button
+  //   class="card ${state.wave[0].played ? "played" : ""}"
+  //   data-button-type="${state.wave[0].suite}"
+  //   data-value="${state.wave[0].value}"
+  //   data-suite="${state.wave[0].suite}"
+  //   data-rank="${state.wave[0].rank}"
+  //   ${state.wave[0].played ? "disabled" : ""}>
+  //   <img src="${state.wave[0].img}" width="242px" height="320px">
+  // </button>`;
 
-  for (const card of state.wave) {
-    cards += `<button
-        class="card ${card.played ? "played" : ""}"
-        data-button-type="${card.suite}"
-        data-value="${card.value}"
-        data-suite="${card.suite}" data-rank="${card.rank}"
-        ${card.played ? "disabled" : ""}>
-        <img src="${card.img}" width="242px" height="320px">
-      </button>`;
-  }
+  slot1.children[0].src = state.wave[0].img;
+  slot1.dataset.buttonType = state.wave[0].suite;
+  slot1.dataset.value = state.wave[0].value;
+  slot1.dataset.suite = state.wave[0].suite;
+  slot1.dataset.rank = state.wave[0].rank;
+  slot1.disabled = state.wave[0].played;
 
-  const cardHTML = `${
-    state.health > 0 ? cards : `<p class="game-over">Knocked out</p>`
-  }`;
+  slot2.children[0].src = state.wave[1].img;
+  slot2.dataset.buttonType = state.wave[1].suite;
+  slot2.dataset.value = state.wave[1].value;
+  slot2.dataset.suite = state.wave[1].suite;
+  slot2.dataset.rank = state.wave[1].rank;
+  slot2.disabled = state.wave[1].played;
+
+  slot3.children[0].src = state.wave[2].img;
+  slot3.dataset.buttonType = state.wave[2].suite;
+  slot3.dataset.value = state.wave[2].value;
+  slot3.dataset.suite = state.wave[2].suite;
+  slot3.dataset.rank = state.wave[2].rank;
+  slot3.disabled = state.wave[2].played;
+
+  slot4.children[0].src = state.wave[3].img;
+  slot4.dataset.buttonType = state.wave[3].suite;
+  slot4.dataset.value = state.wave[3].value;
+  slot4.dataset.suite = state.wave[3].suite;
+  slot4.dataset.rank = state.wave[3].rank;
+  slot4.disabled = state.wave[3].played;
+
+  // slot2.innerHTML = `
+  // <button
+  //   class="card ${state.wave[1].played ? "played" : ""}"
+  //   data-button-type="${state.wave[1].suite}"
+  //   data-value="${state.wave[1].value}"
+  //   data-suite="${state.wave[1].suite}" data-rank="${state.wave[0].rank}"
+  //   ${state.wave[1].played ? "disabled" : ""}>
+  //   <img src="${state.wave[1].img}" width="242px" height="320px">
+  // </button>`;
+
+  // slot3.innerHTML = `
+  // <button
+  //   class="card ${state.wave[2].played ? "played" : ""}"
+  //   data-button-type="${state.wave[2].suite}"
+  //   data-value="${state.wave[2].value}"
+  //   data-suite="${state.wave[2].suite}" data-rank="${state.wave[0].rank}"
+  //   ${state.wave[2].played ? "disabled" : ""}>
+  //   <img src="${state.wave[2].img}" width="242px" height="320px">
+  // </button>`;
+
+  // slot4.innerHTML = `
+  // <button
+  //   class="card ${state.wave[3].played ? "played" : ""}"
+  //   data-button-type="${state.wave[3].suite}"
+  //   data-value="${state.wave[3].value}"
+  //   data-suite="${state.wave[3].suite}" data-rank="${state.wave[3].rank}"
+  //   ${state.wave[3].played ? "disabled" : ""}>
+  //   <img src="${state.wave[3].img}" width="242px" height="320px">
+  // </button>`;
+
+  // 👇 Old solution, update whole board on each turn
+
+  // for (const card of state.wave) {
+  //   cards += `<button
+  //       class="card ${card.played ? "played" : ""}"
+  //       data-button-type="${card.suite}"
+  //       data-value="${card.value}"
+  //       data-suite="${card.suite}" data-rank="${card.rank}"
+  //       ${card.played ? "disabled" : ""}>
+  //       <img src="${card.img}" width="242px" height="320px">
+  //     </button>`;
+  // }
 
   if (canEvade || canRestart) {
     actionButton.classList.remove("disabled");
@@ -81,13 +141,14 @@ function drawGame(state) {
       staminaDisplay.innerHTML = state.durability;
     }
   } else {
-    // First paint, when we don't have a previous state
     healthDisplay.innerHTML = state.health;
     defenceDisplay.innerHTML = state.strength;
     staminaDisplay.innerHTML = state.durability;
   }
 
-  board.innerHTML = cardHTML;
+  state.health === 0
+    ? (gameOverOverlay.style.display = "flex")
+    : (gameOverOverlay.style.display = "none");
 }
 
 function makeDeckPlayable(array) {
@@ -302,8 +363,9 @@ const action = (type, cardRank, cardValue) => {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
+  // console.log("You clicked:", button);
   const { buttonType, rank, value, slot } = button.dataset;
-  console.log(buttonType, rank, value, slot);
+  // console.log("buttonType: ", buttonType, "rank:", rank, "value", value);
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
 });
