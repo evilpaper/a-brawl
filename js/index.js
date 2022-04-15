@@ -67,7 +67,7 @@ function drawGame(state) {
   } else {
     actionButton.classList.add("disabled");
   }
-  actionButton.innerHTML = state.health > 0 ? "Slip by" : "Restart";
+  actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
   actionButton.dataset.buttonType = state.health > 0 ? "evade" : "restart";
 
   // Only update if needed

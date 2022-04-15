@@ -252,7 +252,6 @@ main {
 
 .game-over {
   position: absolute;
-  font-style: italic;
   color: white;
   width: 100%;
   height: 100%;
@@ -274,7 +273,6 @@ main {
   float: right;
   font-family: "Inter", sans-serif;
   font-family: "Whyte Inktrap Regular", sans-serif;
-  font-style: italic;
   font-size: 0.9rem;
 }
 
@@ -289,5 +287,4 @@ main {
   background-color: transparent;
   border-color: hsla(0, 100%, 100%, 0.4);
   color: hsla(0, 100%, 100%, 0.4);
-  /* text-decoration: line-through; */
 }
