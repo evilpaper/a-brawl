@@ -131,24 +131,26 @@ main {
 }
 
 .tracker span {
-  width: 7rem;
+  min-width: 7rem;
   display: flex;
   justify-content: flex-start;
   align-items: center;
 }
 
 .label {
-  font-size: 1rem;
-  color: hsla(0, 0%, 100%, 0.8);
-  font-family: "Inter", sans-serif;
-  font-weight: 200;
+  font-size: 0.9rem;
+  color: hsla(0, 0%, 100%, 0.6);
+  font-family: "Whyte Inktrap Regular", sans-serif;
+}
+
+.label img {
+  opacity: 0.6;
 }
 
 .health,
 .defence,
 .stamina {
-  margin-left: 0.6rem;
-  margin-right: 1rem;
+  margin-left: 0.4rem;
   font-family: "Whyte Inktrap Heavy", sans-serif;
   font-weight: bold;
   font-size: 1.2rem;
@@ -156,11 +158,6 @@ main {
 }
 
 .board {
-  /* display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 0.6rem;
-  aspect-ratio: 3 / 1; */
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(1, auto);
@@ -182,10 +179,8 @@ main {
   background-color: transparent;
 }
 
-.card:focus,
 .card:hover {
   background-color: black;
-  transform: scale(1.05);
 }
 
 .card[disabled] {
@@ -210,6 +205,9 @@ main {
   .board {
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: repeat(2, 1fr);
+  }
+  .tracker {
+    width: 100%;
   }
 }
 
@@ -237,22 +235,11 @@ main {
 } */
 
 /* Tablet and up */
-/* @media (min-width: 900px) {
-  body {
-    height: 100vh;
-    align-items: center;
+@media (min-width: 900px) {
+  .card:hover {
+    transform: scale(1.05);
   }
-  .app {
-    width: 90%;
-  }
-  .board {
-    align-items: flex-start;
-    justify-content: space-between;
-  }
-  .card {
-    width: 24%;
-  }
-} */
+}
 
 /* @keyframes fadein {
   from {
@@ -286,9 +273,8 @@ main {
   color: white;
   float: right;
   font-family: "Inter", sans-serif;
-  font-family: "Whyte Inktrap Heavy", sans-serif;
+  font-family: "Whyte Inktrap Regular", sans-serif;
   font-style: italic;
-  font-weight: 200;
   font-size: 0.9rem;
 }
 
@@ -301,7 +287,7 @@ main {
 .disabled:hover {
   pointer-events: none;
   background-color: transparent;
-  border-color: hsla(0, 100%, 100%, 0.6);
-  color: hsla(0, 100%, 100%, 0.5);
-  text-decoration: line-through;
+  border-color: hsla(0, 100%, 100%, 0.4);
+  color: hsla(0, 100%, 100%, 0.4);
+  /* text-decoration: line-through; */
 }

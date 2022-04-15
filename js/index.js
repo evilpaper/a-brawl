@@ -1,7 +1,6 @@
 import { DECK } from "./DECK.js";
 
 const app = document.querySelector(".app");
-const board = document.querySelector(".board");
 const gameOverOverlay = document.querySelector(".game-over");
 const slot1 = document.querySelector(".slot1");
 const slot2 = document.querySelector(".slot2");
@@ -32,23 +31,8 @@ const initialState = {
 let state = { ...initialState };
 
 function drawGame(state) {
-  let cards = "";
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
-
-  console.log("Previous state is:", state.previousState);
-  console.log("Current state is:", state);
-
-  // slot1.innerHTML = `
-  // <button
-  //   class="card ${state.wave[0].played ? "played" : ""}"
-  //   data-button-type="${state.wave[0].suite}"
-  //   data-value="${state.wave[0].value}"
-  //   data-suite="${state.wave[0].suite}"
-  //   data-rank="${state.wave[0].rank}"
-  //   ${state.wave[0].played ? "disabled" : ""}>
-  //   <img src="${state.wave[0].img}" width="242px" height="320px">
-  // </button>`;
 
   slot1.children[0].src = state.wave[0].img;
   slot1.dataset.buttonType = state.wave[0].suite;
@@ -78,55 +62,12 @@ function drawGame(state) {
   slot4.dataset.rank = state.wave[3].rank;
   slot4.disabled = state.wave[3].played;
 
-  // slot2.innerHTML = `
-  // <button
-  //   class="card ${state.wave[1].played ? "played" : ""}"
-  //   data-button-type="${state.wave[1].suite}"
-  //   data-value="${state.wave[1].value}"
-  //   data-suite="${state.wave[1].suite}" data-rank="${state.wave[0].rank}"
-  //   ${state.wave[1].played ? "disabled" : ""}>
-  //   <img src="${state.wave[1].img}" width="242px" height="320px">
-  // </button>`;
-
-  // slot3.innerHTML = `
-  // <button
-  //   class="card ${state.wave[2].played ? "played" : ""}"
-  //   data-button-type="${state.wave[2].suite}"
-  //   data-value="${state.wave[2].value}"
-  //   data-suite="${state.wave[2].suite}" data-rank="${state.wave[0].rank}"
-  //   ${state.wave[2].played ? "disabled" : ""}>
-  //   <img src="${state.wave[2].img}" width="242px" height="320px">
-  // </button>`;
-
-  // slot4.innerHTML = `
-  // <button
-  //   class="card ${state.wave[3].played ? "played" : ""}"
-  //   data-button-type="${state.wave[3].suite}"
-  //   data-value="${state.wave[3].value}"
-  //   data-suite="${state.wave[3].suite}" data-rank="${state.wave[3].rank}"
-  //   ${state.wave[3].played ? "disabled" : ""}>
-  //   <img src="${state.wave[3].img}" width="242px" height="320px">
-  // </button>`;
-
-  // 👇 Old solution, update whole board on each turn
-
-  // for (const card of state.wave) {
-  //   cards += `<button
-  //       class="card ${card.played ? "played" : ""}"
-  //       data-button-type="${card.suite}"
-  //       data-value="${card.value}"
-  //       data-suite="${card.suite}" data-rank="${card.rank}"
-  //       ${card.played ? "disabled" : ""}>
-  //       <img src="${card.img}" width="242px" height="320px">
-  //     </button>`;
-  // }
-
   if (canEvade || canRestart) {
     actionButton.classList.remove("disabled");
   } else {
     actionButton.classList.add("disabled");
   }
-  actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
+  actionButton.innerHTML = state.health > 0 ? "Slip by" : "Restart";
   actionButton.dataset.buttonType = state.health > 0 ? "evade" : "restart";
 
   // Only update if needed
@@ -363,16 +304,9 @@ const action = (type, cardRank, cardValue) => {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  // console.log("You clicked:", button);
   const { buttonType, rank, value, slot } = button.dataset;
-  // console.log("buttonType: ", buttonType, "rank:", rank, "value", value);
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
 });
-
-// window.addEventListener("load", function () {
-//   board.style.height = `${board.clientHeight}px`;
-//   board.style.width = `${board.clientWidth}px`;
-// });
 
 drawGame(state);

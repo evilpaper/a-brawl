@@ -32,28 +32,53 @@
       type="font/woff2"
       crossorigin
     />
-    <!-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200&display=swap"
-      rel="stylesheet"
-    /> -->
-    <title>A Brawl</title>
+    <title>Super Hero Card Brawl</title>
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body style="position: relative">
     <main class="app">
       <section class="tracker">
         <span>
-          <p class="label">Health</p>
+          <p class="label">
+            <img
+              src="./images/heart.svg"
+              width="12px"
+              height="12px"
+              alt="Heart icon"
+            />
+            Health
+          </p>
           <p class="health">-</p>
         </span>
         <span>
-          <p class="label">Defence</p>
+          <p class="label">
+            <img
+              src="./images/tile.svg"
+              width="12px"
+              height="12px"
+              alt="Tile icon"
+            />
+            Defence
+          </p>
           <p class="defence">-</p>
         </span>
         <span>
-          <p class="label">Stamina</p>
+          <p class="label">
+            <img
+              src="./images/spade.svg"
+              width="12px"
+              height="12px"
+              alt="Spade icon"
+            />
+            <img
+              src="./images/clover.svg"
+              width="12px"
+              height="12px"
+              alt="Clover icon"
+            />
+
+            Stamina
+          </p>
           <p class="stamina">-</p>
         </span>
       </section>
@@ -73,7 +98,7 @@
         <p class="game-over">Knocked out</p>
       </section>
       <button class="action-button disabled" data-button-type="evade">
-        Move on
+        Slip by
       </button>
     </main>
     <script type="module" src="/js/index.js"></script>
