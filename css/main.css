@@ -28,35 +28,35 @@
   font-family: "Whyte Inktrap Regular";
   font-style: normal;
   font-weight: normal;
-  src: url("/fonts/ABCWhyteInktrap-Regular.woff2") format("woff2");
+  src: url("../fonts/ABCWhyteInktrap-Regular.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Whyte Inktrap Medium";
   font-style: normal;
   font-weight: 500;
-  src: url("/fonts/ABCWhyteInktrap-Medium.woff2") format("woff2");
+  src: url("../fonts/ABCWhyteInktrap-Medium.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Whyte Inktrap Bold";
   font-style: normal;
   font-weight: bold;
-  src: url("/fonts/ABCWhyteInktrap-Bold.woff2") format("woff2");
+  src: url("../fonts/ABCWhyteInktrap-Bold.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Whyte Inktrap Book";
   font-style: normal;
   font-weight: bold;
-  src: url("/fonts/ABCWhyteInktrap-Book.woff2") format("woff2");
+  src: url("../fonts/ABCWhyteInktrap-Book.woff2") format("woff2");
 }
 
 @font-face {
   font-family: "Whyte Inktrap Heavy";
   font-style: normal;
   font-weight: bold;
-  src: url("/fonts/ABCWhyteInktrap-Heavy.woff2") format("woff2");
+  src: url("../fonts/ABCWhyteInktrap-Heavy.woff2") format("woff2");
 }
 
 /* A MINIMAL RESET */
