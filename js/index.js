@@ -309,4 +309,6 @@ app.addEventListener("click", (e) => {
   drawGame(state);
 });
 
-drawGame(state);
+setTimeout(() => {
+  drawGame(state);
+}, 2000);
