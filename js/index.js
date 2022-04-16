@@ -1,4 +1,7 @@
 import { DECK } from "./DECK.js";
+import { rules } from "./rules.js";
+
+console.log(rules);
 
 const app = document.querySelector(".app");
 const gameOverOverlay = document.querySelector(".game-over");
