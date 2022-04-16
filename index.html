@@ -6,57 +6,99 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link
       rel="preload"
-      href="/fonts/poppins-v19-latin-700.woff2"
+      href="/fonts/ABCWhyteInktrap-Regular.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/poppins-v19-latin-700italic.woff2"
+      href="/fonts/ABCWhyteInktrap-Heavy.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
     <link
       rel="preload"
-      href="/fonts/poppins-v19-latin-900italic.woff2"
+      href="/fonts/inter-v8-latin-200.woff2"
       as="font"
       type="font/woff2"
       crossorigin
     />
-    <title>A Brawl</title>
+    <link
+      rel="preload"
+      href="/fonts/inter-v8-latin-regular.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="icon" type="image/png" href="favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16" />
+
+    <title>Super Hero Card Brawl</title>
     <link rel="stylesheet" href="/css/main.css" />
   </head>
   <body style="position: relative">
     <main class="app">
       <section class="tracker">
-        <span class="cell">
-          <span class="label"><p>Health</p></span>
-          <span class="value">
-            <p class="health">-</p>
-            <!-- <p class="suite">♥</p> -->
-          </span>
+        <span>
+          <p class="label">
+            <img
+              src="./images/heart.svg"
+              width="12px"
+              height="12px"
+              alt="Heart icon"
+            />
+            Health
+          </p>
+          <p class="health">-</p>
         </span>
-        <span class="cell">
-          <span class="label"><p>Defence</p></span>
-          <span class="value">
-            <p class="defence">-</p>
-            <!-- <p class="suite">♦</p> -->
-          </span>
+        <span>
+          <p class="label">
+            <img
+              src="./images/tile.svg"
+              width="12px"
+              height="12px"
+              alt="Tile icon"
+            />
+            Defence
+          </p>
+          <p class="defence">-</p>
         </span>
-        <span class="cell">
-          <span class="label"><p>Stamina</p></span>
-          <span class="value">
-            <p class="stamina">-</p>
-            <!-- <p class="suite">♠♣</p> -->
-          </span>
+        <span>
+          <p class="label">
+            <img
+              src="./images/spade.svg"
+              width="12px"
+              height="12px"
+              alt="Spade icon"
+            />
+            <img
+              src="./images/clover.svg"
+              width="12px"
+              height="12px"
+              alt="Clover icon"
+            />
+
+            Stamina
+          </p>
+          <p class="stamina">-</p>
         </span>
       </section>
       <section class="board">
-        <button class="card">
+        <button class="card slot1" data-slot="one">
           <img src="./images/clover-2.jpg" width="242px" height="320px" />
         </button>
+        <button class="card slot2" data-slot="two">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <button class="card slot3" data-slot="three">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <button class="card slot4" data-slot="four">
+          <img src="./images/clover-2.jpg" width="242px" height="320px" />
+        </button>
+        <p class="game-over">Knocked out</p>
       </section>
       <button class="action-button disabled" data-button-type="evade">
         Move on
