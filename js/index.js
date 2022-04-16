@@ -340,7 +340,6 @@ app.addEventListener("click", (e) => {
   const { buttonType, rank, value, slot } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
-  console.log(state);
 });
 
 // Add a little delay first time ro we can see the nice card background
