@@ -5,6 +5,7 @@ console.log(rules);
 
 const app = document.querySelector(".app");
 const gameOverOverlay = document.querySelector(".game-over");
+const gameWinOverlay = document.querySelector(".game-win");
 const slot1 = document.querySelector(".slot1");
 const slot2 = document.querySelector(".slot2");
 const slot3 = document.querySelector(".slot3");
@@ -16,6 +17,7 @@ const actionButton = document.querySelector(".action-button");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
+const OPPONENT_HEROS = 28;
 
 const playableDeck = makeDeckPlayable(DECK);
 const shuffledDeck = shuffle([...playableDeck]);
@@ -29,6 +31,7 @@ const initialState = {
   health: MAX_HEALTH,
   strength: 0,
   durability: 0,
+  wins: 0,
 };
 
 let state = { ...initialState };
@@ -89,6 +92,10 @@ function drawGame(state) {
   actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
   actionButton.dataset.buttonType = state.health > 0 ? "evade" : "restart";
 
+  actionButton.innerHTML = state.win === OPPONENT_HEROS ? "Move on" : "Restart";
+  actionButton.dataset.buttonType =
+    state.win === OPPONENT_HEROS ? "evade" : "restart";
+
   // Only update if needed
   if (state.previousState) {
     if (state.previousState.health !== state.health) {
@@ -109,6 +116,10 @@ function drawGame(state) {
   state.health === 0
     ? (gameOverOverlay.style.display = "flex")
     : (gameOverOverlay.style.display = "none");
+
+  state.wins === OPPONENT_HEROS
+    ? (gameWinOverlay.style.display = "flex")
+    : (gameWinOverlay.style.display = "none");
 }
 
 function makeDeckPlayable(array) {
@@ -249,6 +260,7 @@ function updatestate(action) {
           state.durability
         ),
         wave: getUpdatedWave(state.wave, getCardIndex(state.wave, action)),
+        wins: state.wins + 1,
       };
     case "♥":
       return {
@@ -328,8 +340,10 @@ app.addEventListener("click", (e) => {
   const { buttonType, rank, value, slot } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
+  console.log(state);
 });
 
+// Add a little delay first time ro we can see the nice card background
 setTimeout(() => {
   drawGame(state);
 }, 2000);
