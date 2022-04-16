@@ -34,33 +34,49 @@ function drawGame(state) {
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
 
-  slot1.children[0].src = state.wave[0].img;
-  slot1.dataset.buttonType = state.wave[0].suite;
-  slot1.dataset.value = state.wave[0].value;
-  slot1.dataset.suite = state.wave[0].suite;
-  slot1.dataset.rank = state.wave[0].rank;
-  slot1.disabled = state.wave[0].played;
+  if (state.wave[0]) {
+    slot1.children[0].src = state.wave[0].img;
+    slot1.dataset.buttonType = state.wave[0].suite;
+    slot1.dataset.value = state.wave[0].value;
+    slot1.dataset.suite = state.wave[0].suite;
+    slot1.dataset.rank = state.wave[0].rank;
+    slot1.disabled = state.wave[0].played;
+  } else {
+    slot1.children[0].src = "images/empty-slot.jpg";
+  }
 
-  slot2.children[0].src = state.wave[1].img;
-  slot2.dataset.buttonType = state.wave[1].suite;
-  slot2.dataset.value = state.wave[1].value;
-  slot2.dataset.suite = state.wave[1].suite;
-  slot2.dataset.rank = state.wave[1].rank;
-  slot2.disabled = state.wave[1].played;
+  if (state.wave[1]) {
+    slot2.children[0].src = state.wave[1].img;
+    slot2.dataset.buttonType = state.wave[1].suite;
+    slot2.dataset.value = state.wave[1].value;
+    slot2.dataset.suite = state.wave[1].suite;
+    slot2.dataset.rank = state.wave[1].rank;
+    slot2.disabled = state.wave[1].played;
+  } else {
+    slot2.children[0].src = "images/empty-slot.jpg";
+  }
 
-  slot3.children[0].src = state.wave[2].img;
-  slot3.dataset.buttonType = state.wave[2].suite;
-  slot3.dataset.value = state.wave[2].value;
-  slot3.dataset.suite = state.wave[2].suite;
-  slot3.dataset.rank = state.wave[2].rank;
-  slot3.disabled = state.wave[2].played;
+  if (state.wave[2]) {
+    slot3.children[0].src = state.wave[2].img;
+    slot3.dataset.buttonType = state.wave[2].suite;
+    slot3.dataset.value = state.wave[2].value;
+    slot3.dataset.suite = state.wave[2].suite;
+    slot3.dataset.rank = state.wave[2].rank;
+    slot3.disabled = state.wave[2].played;
+  } else {
+    slot3.children[0].src = "images/empty-slot.jpg";
+  }
 
-  slot4.children[0].src = state.wave[3].img;
-  slot4.dataset.buttonType = state.wave[3].suite;
-  slot4.dataset.value = state.wave[3].value;
-  slot4.dataset.suite = state.wave[3].suite;
-  slot4.dataset.rank = state.wave[3].rank;
-  slot4.disabled = state.wave[3].played;
+  if (state.wave[3]) {
+    slot4.children[0].src = state.wave[3].img;
+    slot4.dataset.buttonType = state.wave[3].suite;
+    slot4.dataset.value = state.wave[3].value;
+    slot4.dataset.suite = state.wave[3].suite;
+    slot4.dataset.rank = state.wave[3].rank;
+    slot4.disabled = state.wave[3].played;
+  } else {
+    slot4.children[0].src = "images/empty-slot.jpg";
+  }
 
   if (canEvade || canRestart) {
     actionButton.classList.remove("disabled");
