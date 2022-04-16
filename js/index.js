@@ -281,6 +281,7 @@ const action = (type, cardRank, cardValue) => {
     case "♠":
     case "♥":
     case "♦":
+    case "★":
       return {
         type: type,
         rank: cardRank,

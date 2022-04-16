@@ -62,19 +62,19 @@ export const DECK = [
   {
     suite: "♣",
     rank: "Q",
-    value: 11,
+    value: 13,
     img: "images/clover-q.jpg",
   },
   {
     suite: "♣",
     rank: "K",
-    value: 11,
+    value: 15,
     img: "images/clover-k.jpg",
   },
   {
     suite: "♣",
     rank: "A",
-    value: 11,
+    value: 17,
     img: "images/clover-a.jpg",
   },
   {
@@ -296,19 +296,31 @@ export const DECK = [
   {
     suite: "♠",
     rank: "Q",
-    value: 11,
+    value: 13,
     img: "images/spade-q.jpg",
   },
   {
     suite: "♠",
     rank: "K",
-    value: 11,
+    value: 15,
     img: "images/spade-k.jpg",
   },
   {
     suite: "♠",
     rank: "A",
-    value: 11,
+    value: 17,
     img: "images/spade-a.jpg",
+  },
+  {
+    suite: "★",
+    rank: "D",
+    value: 21,
+    img: "images/donsol-1.jpg",
+  },
+  {
+    suite: "★",
+    rank: "D",
+    value: 21,
+    img: "images/donsol-2.jpg",
   },
 ];
