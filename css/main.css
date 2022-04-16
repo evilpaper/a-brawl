@@ -250,7 +250,8 @@ main {
   }
 } */
 
-.game-over {
+.game-over,
+.game-win {
   position: absolute;
   color: white;
   width: 100%;

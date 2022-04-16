@@ -209,6 +209,7 @@ function updatestate(action) {
   switch (action.type) {
     case "♣":
     case "♠":
+    case "★":
       return {
         ...state,
         previousState: state,
