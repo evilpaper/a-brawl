@@ -1,6 +1,5 @@
 :root {
-  --card-width: 4rem;
-  --card-height: 5.7rem;
+  --app-height: 100%;
 }
 
 /* inter-200 - latin */
@@ -64,6 +63,8 @@
 html {
   box-sizing: border-box;
   font-size: 16px;
+  height: 100vh;
+  height: var(--app-height);
 }
 
 *,
@@ -109,6 +110,7 @@ button:focus {
 
 body {
   height: 100vh;
+  height: var(--app-height);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -119,15 +121,13 @@ body {
 }
 
 main {
-  padding: 0.4rem;
   padding: 1rem;
 }
 
 .tracker {
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  margin-bottom: 1rem;
+  align-items: flex-end;
 }
 
 .tracker span {
@@ -138,7 +138,7 @@ main {
 }
 
 .label {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: hsla(0, 0%, 100%, 0.6);
   font-family: "Whyte Inktrap Regular", sans-serif;
 }
@@ -150,11 +150,12 @@ main {
 .health,
 .defence,
 .stamina {
-  margin-left: 0.4rem;
+  margin-left: 0.6rem;
   font-family: "Whyte Inktrap Heavy", sans-serif;
   font-weight: bold;
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: aliceblue;
+  min-width: 1.4rem;
 }
 
 .board {
@@ -164,6 +165,7 @@ main {
   gap: 1rem;
   justify-content: center;
   position: relative;
+  margin: 0.4rem 0;
 }
 
 .card {
@@ -207,7 +209,7 @@ main {
     grid-template-rows: repeat(2, 1fr);
   }
   .tracker {
-    width: 100%;
+    justify-content: space-between;
   }
 }
 
@@ -270,7 +272,7 @@ main {
   border: 1px solid white;
   background-color: transparent;
   border-radius: 1rem;
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
   color: white;
   float: right;
   font-family: "Inter", sans-serif;
