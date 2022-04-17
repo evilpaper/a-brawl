@@ -185,6 +185,10 @@ main {
   background-color: black;
 }
 
+.card:focus {
+  outline: auto;
+}
+
 .card[disabled] {
   pointer-events: none;
   opacity: 0.6;
