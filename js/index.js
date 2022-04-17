@@ -99,9 +99,10 @@ function drawGame(state) {
   actionButton.innerHTML = state.health > 0 ? "Move on" : "Restart";
   actionButton.dataset.buttonType = state.health > 0 ? "evade" : "restart";
 
-  actionButton.innerHTML = state.win === OPPONENT_HEROS ? "Restart" : "Move on";
-  actionButton.dataset.buttonType =
-    state.win === OPPONENT_HEROS ? "restart" : "evade";
+  if (state.win === OPPONENT_HEROS) {
+    actionButton.innerHTML = "Restart";
+    actionButton.dataset.buttonType = "restart";
+  }
 
   // Only update if needed
   if (state.previousState) {
