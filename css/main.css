@@ -24,31 +24,17 @@
 }
 
 @font-face {
+  font-family: "Whyte Inktrap Book";
+  font-style: normal;
+  font-weight: normal;
+  src: url("../fonts/ABCWhyteInktrap-Book.woff2") format("woff2");
+}
+
+@font-face {
   font-family: "Whyte Inktrap Regular";
   font-style: normal;
   font-weight: normal;
   src: url("../fonts/ABCWhyteInktrap-Regular.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Whyte Inktrap Medium";
-  font-style: normal;
-  font-weight: 500;
-  src: url("../fonts/ABCWhyteInktrap-Medium.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Whyte Inktrap Bold";
-  font-style: normal;
-  font-weight: bold;
-  src: url("../fonts/ABCWhyteInktrap-Bold.woff2") format("woff2");
-}
-
-@font-face {
-  font-family: "Whyte Inktrap Book";
-  font-style: normal;
-  font-weight: bold;
-  src: url("../fonts/ABCWhyteInktrap-Book.woff2") format("woff2");
 }
 
 @font-face {
@@ -88,7 +74,7 @@ button {
   padding: 0;
   font-weight: normal;
   font-size: 1rem;
-  font-family: "Whyte Inktrap Regular", sans-serif;
+  font-family: "Whyte Inktrap Book", sans-serif;
 }
 
 ol,
@@ -114,9 +100,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: "Whyte Inktrap Regular", -apple-system, BlinkMacSystemFont,
-    avenir next, avenir, segoe ui, helvetica neue, helvetica, Ubuntu, roboto,
-    noto, arial, sans-serif;
   background-color: black;
 }
 
@@ -139,7 +122,7 @@ main {
 .label {
   font-size: 1rem;
   color: hsla(0, 0%, 100%, 0.6);
-  font-family: "Whyte Inktrap Regular", sans-serif;
+  font-family: "Whyte Inktrap Book", sans-serif;
 }
 
 .label img {
