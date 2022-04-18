@@ -53,7 +53,8 @@ function drawGame(state) {
     slot1.dataset.value = state.wave[0].value;
     slot1.dataset.suite = state.wave[0].suite;
     slot1.dataset.rank = state.wave[0].rank;
-    slot1.disabled = state.wave[0].played;
+    slot1.disabled =
+      state.wave[0].played || canRestart || state.win === OPPONENT_HEROS;
   } else {
     slot1.children[0].src = "images/empty-slot.jpg";
   }
@@ -64,7 +65,8 @@ function drawGame(state) {
     slot2.dataset.value = state.wave[1].value;
     slot2.dataset.suite = state.wave[1].suite;
     slot2.dataset.rank = state.wave[1].rank;
-    slot2.disabled = state.wave[1].played;
+    slot2.disabled =
+      state.wave[1].played || canRestart || state.win === OPPONENT_HEROS;
   } else {
     slot2.children[0].src = "images/empty-slot.jpg";
   }
@@ -75,7 +77,8 @@ function drawGame(state) {
     slot3.dataset.value = state.wave[2].value;
     slot3.dataset.suite = state.wave[2].suite;
     slot3.dataset.rank = state.wave[2].rank;
-    slot3.disabled = state.wave[2].played;
+    slot3.disabled =
+      state.wave[2].played || canRestart || state.win === OPPONENT_HEROS;
   } else {
     slot3.children[0].src = "images/empty-slot.jpg";
   }
@@ -86,7 +89,8 @@ function drawGame(state) {
     slot4.dataset.value = state.wave[3].value;
     slot4.dataset.suite = state.wave[3].suite;
     slot4.dataset.rank = state.wave[3].rank;
-    slot4.disabled = state.wave[3].played;
+    slot4.disabled =
+      state.wave[3].played || canRestart || state.win === OPPONENT_HEROS;
   } else {
     slot4.children[0].src = "images/empty-slot.jpg";
   }
