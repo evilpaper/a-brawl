@@ -169,9 +169,9 @@ main {
   background-color: black;
 }
 
-/* .card:focus {
+.card:focus {
   outline: auto;
-} */
+}
 
 .card[disabled] {
   pointer-events: none;
@@ -267,7 +267,6 @@ main {
   border: 1px solid white;
   background-color: transparent;
   border-radius: 1rem;
-  /* margin-top: 1rem; */
   color: white;
   float: right;
   font-family: "Inter", sans-serif;
