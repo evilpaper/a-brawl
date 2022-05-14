@@ -368,7 +368,7 @@ app.addEventListener("click", (e) => {
 });
 
 // Add a little delay first time ro we can see the nice card background
-// setTimeout(() => {
-//   drawGame(state);
-// }, 1000);
-drawGame(state);
+setTimeout(() => {
+  drawGame(state);
+}, 1000);
+// drawGame(state);

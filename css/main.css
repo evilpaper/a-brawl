@@ -82,10 +82,10 @@ ul {
   list-style: none;
 }
 
-img {
+/* img {
   max-width: 100%;
   height: auto;
-}
+} */
 
 input:focus,
 select:focus,
@@ -156,14 +156,15 @@ main {
 .card {
   margin: 0;
   padding: 0;
-  border: none;
-  border-radius: 0.6rem;
+  border-radius: 0.8rem;
   cursor: pointer;
   transition: all 0.2s ease-out;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: transparent;
+  border: 2px solid hsla(0, 0%, 100%, 0.9);
+  overflow: hidden;
 }
 
 .card:hover {
@@ -180,7 +181,6 @@ main {
 }
 
 .card img {
-  border-radius: 0.6rem;
   transition: all 0.2s ease-out;
 }
 
