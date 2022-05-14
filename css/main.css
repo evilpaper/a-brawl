@@ -105,6 +105,7 @@ body {
 
 main {
   padding: 0.6rem 1rem 1rem 1rem;
+  position: relative;
 }
 
 .tracker {
@@ -121,12 +122,12 @@ main {
 
 .label {
   font-size: 1rem;
-  color: hsla(0, 0%, 100%, 0.6);
+  color: hsla(0, 0%, 100%, 0.9);
   font-family: "Whyte Inktrap Book", sans-serif;
 }
 
 .label img {
-  opacity: 0.6;
+  opacity: 1;
 }
 
 .health,
@@ -262,6 +263,32 @@ main {
   text-align: center;
 }
 
+.game-title {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  background-color: hsla(0, 0%, 0%, 0.8);
+}
+
+.game-title div {
+  display: grid;
+  place-items: center;
+}
+
+.start-button {
+  padding: 0.2rem 1rem;
+  border: none;
+  background-color: transparent;
+  color: white;
+  font-family: "Whyte Inktrap Book", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
 .action-button {
   padding: 0.2rem 1rem;
   border: 1px solid white;
@@ -269,7 +296,6 @@ main {
   border-radius: 1rem;
   color: white;
   float: right;
-  font-family: "Inter", sans-serif;
   font-family: "Whyte Inktrap Regular", sans-serif;
   font-size: 0.9rem;
 }
@@ -283,6 +309,7 @@ main {
 .disabled:hover {
   pointer-events: none;
   background-color: transparent;
-  border-color: hsla(0, 100%, 100%, 0.4);
-  color: hsla(0, 100%, 100%, 0.4);
+  border-color: hsla(0, 100%, 100%, 0.8);
+  color: hsla(0, 100%, 100%, 0.8);
+  text-decoration: line-through;
 }

@@ -21,6 +21,7 @@ const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
 const actionButton = document.querySelector(".action-button");
+const titleScreen = document.querySelector(".game-title");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
@@ -350,6 +351,14 @@ const action = (type, cardRank, cardValue) => {
   }
 };
 
+titleScreen.addEventListener("click", function () {
+  titleScreen.style.display = "none";
+});
+
+document.addEventListener("keydown", function () {
+  titleScreen.style.display = "none";
+});
+
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
@@ -359,6 +368,7 @@ app.addEventListener("click", (e) => {
 });
 
 // Add a little delay first time ro we can see the nice card background
-setTimeout(() => {
-  drawGame(state);
-}, 1000);
+// setTimeout(() => {
+//   drawGame(state);
+// }, 1000);
+drawGame(state);
