@@ -1,6 +1,10 @@
 import { DECK } from "./DECK.js";
 import { rules } from "./rules.js";
 
+/* 
+  Set app height to windows inner height on load and rezise to make sure the app 
+  does not continue outside the viewport on iOS Safari due the calculation method which Safari and Chrome.
+*/
 const appHeight = () => {
   const doc = document.documentElement;
   doc.style.setProperty("--app-height", `${window.innerHeight}px`);
@@ -8,6 +12,9 @@ const appHeight = () => {
 window.addEventListener("resize", appHeight);
 appHeight();
 
+/* 
+   
+*/
 console.log(rules);
 
 const app = document.querySelector(".app");
@@ -371,4 +378,3 @@ app.addEventListener("click", (e) => {
 setTimeout(() => {
   drawGame(state);
 }, 1000);
-// drawGame(state);

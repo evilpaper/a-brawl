@@ -244,20 +244,22 @@ main {
 
 .game-title {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   background-color: hsla(0, 0%, 0%, 0.8);
 }
 
-.game-title div {
-  display: grid;
-  place-items: center;
+.game-title-image-wrapper {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .start-button {
