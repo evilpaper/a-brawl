@@ -51,6 +51,23 @@ const initialState = {
 
 let state = { ...initialState };
 
+const equals = (a, b) => {
+  if (a === b) return true;
+
+  if (a instanceof Date && b instanceof Date)
+    return a.getTime() === b.getTime();
+
+  if (!a || !b || (typeof a !== "object" && typeof b !== "object"))
+    return a === b;
+
+  if (a.prototype !== b.prototype) return false;
+
+  const keys = Object.keys(a);
+  if (keys.length !== Object.keys(b).length) return false;
+
+  return keys.every((k) => equals(a[k], b[k]));
+};
+
 function drawGame(state) {
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
@@ -68,21 +85,31 @@ function drawGame(state) {
   //   slot1.children[0].src = "images/empty-slot.jpg";
   // }
 
-  if (state.wave[0]) {
+  console.log("Previous card :", state?.previousState?.wave[0]);
+  console.log("Current card :", state.wave[0]);
+  console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
+
+  if (!equals(state?.previousState?.wave[0], state.wave[0])) {
     slot1.innerHTML = `
-      <button class="card"
+      <button class="card new"
          ${state.wave[0].played && "disabled"}
          data-button-type=${state.wave[0].suite}
          data-value=${state.wave[0].value}
          data-suite=${state.wave[0].suite}
          data-rank=${state.wave[0].rank}
       >
-        <img 
-          src=${state.wave[0].img} 
-          width="242px" 
+        <img
+          src=${state.wave[0].img}
+          width="242px"
           height="320px"
         />
       </button>`;
+    gsap.from(".new", {
+      duration: 1,
+      y: "-4%",
+      scale: "1.5",
+      rotation: "20deg",
+    });
   }
 
   if (state.wave[1]) {
@@ -386,7 +413,6 @@ document.addEventListener("keydown", function () {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  console.log(button);
   const { buttonType, rank, value, slot } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
