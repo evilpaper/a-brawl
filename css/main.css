@@ -132,12 +132,11 @@ main {
   margin: 0.4rem 0;
 }
 
-.sslot1 {
+.card-slot {
   position: relative;
 }
 
-.ccard {
-  position: absolute;
+.card-background {
   margin: 0;
   padding: 0;
   border-radius: 0.8rem;
@@ -147,15 +146,11 @@ main {
   justify-content: center;
   align-items: center;
   background-color: transparent;
-  border: 2px solid hsla(0, 0%, 100%, 0.9);
   overflow: hidden;
-}
-
-.ccardholder {
-  position: absolute;
 }
 
 .card {
+  position: relative;
   margin: 0;
   padding: 0;
   border-radius: 0.8rem;
@@ -164,9 +159,10 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
-  border: 2px solid hsla(0, 0%, 100%, 0.9);
+  background-color: black;
   overflow: hidden;
+  border: none;
+  outline: none;
 }
 
 .card:hover {
@@ -177,8 +173,20 @@ main {
   outline: auto;
 }
 
+.cardholder-1,
+.cardholder-2,
+.cardholder-3,
+.cardholder-4 {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .card[disabled] {
   pointer-events: none;
+}
+
+.card[disabled] img {
   opacity: 0.6;
 }
 

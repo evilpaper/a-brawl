@@ -30,7 +30,10 @@ const staminaDisplay = document.querySelector(".stamina");
 const actionButton = document.querySelector(".action-button");
 const titleScreen = document.querySelector(".game-title");
 
-const cardholder = document.querySelector(".ccardholder");
+const cardholder1 = document.querySelector(".cardholder-1");
+const cardholder2 = document.querySelector(".cardholder-2");
+const cardholder3 = document.querySelector(".cardholder-3");
+const cardholder4 = document.querySelector(".cardholder-4");
 
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
@@ -74,26 +77,13 @@ function drawGame(state) {
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
 
-  // if (state.wave[0]) {
-  //   slot1.children[0].src = state.wave[0].img;
-  //   slot1.dataset.buttonType = state.wave[0].suite;
-  //   slot1.dataset.value = state.wave[0].value;
-  //   slot1.dataset.suite = state.wave[0].suite;
-  //   slot1.dataset.rank = state.wave[0].rank;
-  //   slot1.disabled =
-  //     state.wave[0].played || canRestart || state.wins === OPPONENT_HEROS;
-  //   slot1.blur();
-  // } else {
-  //   slot1.children[0].src = "images/empty-slot.jpg";
-  // }
-
-  console.log("Previous card :", state?.previousState?.wave[0]);
-  console.log("Current card :", state.wave[0]);
-  console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
+  // console.log("Previous card :", state?.previousState?.wave[0]);
+  // console.log("Current card :", state.wave[0]);
+  // console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
 
   if (!equals(state?.previousState?.wave[0], state.wave[0])) {
-    cardholder.innerHTML = `
-      <button class="card new"
+    cardholder1.innerHTML = `
+      <button class="card"
          ${state.wave[0].played && "disabled"}
          data-button-type=${state.wave[0].suite}
          data-value=${state.wave[0].value}
@@ -108,43 +98,55 @@ function drawGame(state) {
       </button>`;
   }
 
-  if (state.wave[1]) {
-    slot2.children[0].src = state.wave[1].img;
-    slot2.dataset.buttonType = state.wave[1].suite;
-    slot2.dataset.value = state.wave[1].value;
-    slot2.dataset.suite = state.wave[1].suite;
-    slot2.dataset.rank = state.wave[1].rank;
-    slot2.disabled =
-      state.wave[1].played || canRestart || state.wins === OPPONENT_HEROS;
-    slot2.blur();
-  } else {
-    slot2.children[0].src = "images/empty-slot.jpg";
+  if (!equals(state?.previousState?.wave[1], state.wave[1])) {
+    cardholder2.innerHTML = `
+      <button class="card"
+         ${state.wave[1].played && "disabled"}
+         data-button-type=${state.wave[1].suite}
+         data-value=${state.wave[1].value}
+         data-suite=${state.wave[1].suite}
+         data-rank=${state.wave[1].rank}
+      >
+        <img
+          src=${state.wave[2].img}
+          width="242px"
+          height="320px"
+        />
+      </button>`;
   }
 
-  if (state.wave[2]) {
-    slot3.children[0].src = state.wave[2].img;
-    slot3.dataset.buttonType = state.wave[2].suite;
-    slot3.dataset.value = state.wave[2].value;
-    slot3.dataset.suite = state.wave[2].suite;
-    slot3.dataset.rank = state.wave[2].rank;
-    slot3.disabled =
-      state.wave[2].played || canRestart || state.wins === OPPONENT_HEROS;
-    slot3.blur();
-  } else {
-    slot3.children[0].src = "images/empty-slot.jpg";
+  if (!equals(state?.previousState?.wave[2], state.wave[2])) {
+    cardholder3.innerHTML = `
+      <button class="card"
+         ${state.wave[2].played && "disabled"}
+         data-button-type=${state.wave[2].suite}
+         data-value=${state.wave[2].value}
+         data-suite=${state.wave[2].suite}
+         data-rank=${state.wave[2].rank}
+      >
+        <img
+          src=${state.wave[1].img}
+          width="242px"
+          height="320px"
+        />
+      </button>`;
   }
 
-  if (state.wave[3]) {
-    slot4.children[0].src = state.wave[3].img;
-    slot4.dataset.buttonType = state.wave[3].suite;
-    slot4.dataset.value = state.wave[3].value;
-    slot4.dataset.suite = state.wave[3].suite;
-    slot4.dataset.rank = state.wave[3].rank;
-    slot4.disabled =
-      state.wave[3].played || canRestart || state.wins === OPPONENT_HEROS;
-    slot4.blur();
-  } else {
-    slot4.children[0].src = "images/empty-slot.jpg";
+  if (!equals(state?.previousState?.wave[3], state.wave[3])) {
+    cardholder4.innerHTML = `
+      <button class="card"
+         ${state.wave[3].played && "disabled"}
+         data-button-type=${state.wave[3].suite}
+         data-value=${state.wave[3].value}
+         data-suite=${state.wave[3].suite}
+         data-rank=${state.wave[3].rank}
+      >
+        <img
+          src=${state.wave[3].img}
+          width="242px"
+          height="320px"
+        />
+      </button>`;
   }
 
   if (canEvade || canRestart) {
@@ -400,21 +402,23 @@ const action = (type, cardRank, cardValue) => {
 
 titleScreen.addEventListener("click", function () {
   titleScreen.style.display = "none";
+  drawGame(state);
 });
 
 document.addEventListener("keydown", function () {
   titleScreen.style.display = "none";
+  drawGame(state);
 });
 
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
-  const { buttonType, rank, value, slot } = button.dataset;
+  const { buttonType, rank, value } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
 });
 
 // Add a little delay first time ro we can see the nice card background
-setTimeout(() => {
-  drawGame(state);
-}, 1000);
+// setTimeout(() => {
+//   drawGame(state);
+// }, 1000);
