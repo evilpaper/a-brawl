@@ -108,7 +108,7 @@ function drawGame(state) {
          data-rank=${state.wave[1].rank}
       >
         <img
-          src=${state.wave[2].img}
+          src=${state.wave[1].img}
           width="242px"
           height="320px"
         />
@@ -125,7 +125,7 @@ function drawGame(state) {
          data-rank=${state.wave[2].rank}
       >
         <img
-          src=${state.wave[1].img}
+          src=${state.wave[2].img}
           width="242px"
           height="320px"
         />
