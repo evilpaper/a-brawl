@@ -30,6 +30,8 @@ const staminaDisplay = document.querySelector(".stamina");
 const actionButton = document.querySelector(".action-button");
 const titleScreen = document.querySelector(".game-title");
 
+const cardholder = document.querySelector(".ccardholder");
+
 const CARDS_IN_WAVE = 4;
 const MAX_HEALTH = 21;
 const OPPONENT_HEROS = 28;
@@ -90,7 +92,7 @@ function drawGame(state) {
   console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
 
   if (!equals(state?.previousState?.wave[0], state.wave[0])) {
-    slot1.innerHTML = `
+    cardholder.innerHTML = `
       <button class="card new"
          ${state.wave[0].played && "disabled"}
          data-button-type=${state.wave[0].suite}
@@ -104,12 +106,6 @@ function drawGame(state) {
           height="320px"
         />
       </button>`;
-    gsap.from(".new", {
-      duration: 1,
-      y: "-4%",
-      scale: "1.5",
-      rotation: "20deg",
-    });
   }
 
   if (state.wave[1]) {

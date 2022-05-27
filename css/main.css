@@ -132,11 +132,11 @@ main {
   margin: 0.4rem 0;
 }
 
-.slot1 {
+.sslot1 {
   position: relative;
 }
 
-.card2 {
+.ccard {
   position: absolute;
   margin: 0;
   padding: 0;
@@ -149,6 +149,10 @@ main {
   background-color: transparent;
   border: 2px solid hsla(0, 0%, 100%, 0.9);
   overflow: hidden;
+}
+
+.ccardholder {
+  position: absolute;
 }
 
 .card {
