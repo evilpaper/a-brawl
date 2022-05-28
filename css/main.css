@@ -68,8 +68,7 @@ img {
 
 input:focus,
 select:focus,
-textarea:focus,
-button:focus {
+textarea:focus {
   outline: none;
 }
 
@@ -326,4 +325,17 @@ main {
   border-color: hsla(0, 100%, 100%, 0.8);
   color: hsla(0, 100%, 100%, 0.8);
   text-decoration: line-through;
+}
+
+.card-button {
+  background: transparent;
+  position: relative;
+  border: none;
+  border-radius: 1rem;
+}
+
+.card-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

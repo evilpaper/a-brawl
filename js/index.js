@@ -413,6 +413,7 @@ document.addEventListener("keydown", function () {
 app.addEventListener("click", (e) => {
   if (!e.target.closest("button")) return;
   const button = e.target.closest("button");
+  console.log("Yeah, you clicked!");
   const { buttonType, rank, value } = button.dataset;
   state = updatestate(action(buttonType, rank, value));
   drawGame(state);
