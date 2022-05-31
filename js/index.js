@@ -20,15 +20,17 @@ console.log(rules);
 const app = document.querySelector(".app");
 const gameOverOverlay = document.querySelector(".game-over");
 const gameWinOverlay = document.querySelector(".game-win");
-const slot1 = document.querySelector(".slot1");
-const slot2 = document.querySelector(".slot2");
-const slot3 = document.querySelector(".slot3");
-const slot4 = document.querySelector(".slot4");
+const slot1 = document.querySelector(".card-1");
+const slot2 = document.querySelector(".card-2");
+const slot3 = document.querySelector(".card-3");
+const slot4 = document.querySelector(".card-4");
 const healthDisplay = document.querySelector(".health");
 const defenceDisplay = document.querySelector(".defence");
 const staminaDisplay = document.querySelector(".stamina");
 const actionButton = document.querySelector(".action-button");
 const titleScreen = document.querySelector(".game-title");
+
+const cardholder = document.querySelectorAll(".card-holder");
 
 const cardholder1 = document.querySelector(".cardholder-1");
 const cardholder2 = document.querySelector(".cardholder-2");
@@ -77,77 +79,134 @@ function drawGame(state) {
   const canEvade = state.wave.filter((card) => card.played).length > 2;
   const canRestart = state.health === 0;
 
-  // console.log("Previous card :", state?.previousState?.wave[0]);
-  // console.log("Current card :", state.wave[0]);
-  // console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
+  console.log("Previous card :", state?.previousState?.wave[0]);
+  console.log("Current card :", state.wave[0]);
+  console.log("Equals :", equals(state?.previousState?.wave[0], state.wave[0]));
 
   if (!equals(state?.previousState?.wave[0], state.wave[0])) {
+    slot1.dataset.buttonType = state.wave[0].suite;
+    slot1.dataset.value = state.wave[0].value;
+    slot1.dataset.suite = state.wave[0].suite;
+    slot1.dataset.rank = state.wave[0].rank;
+    slot1.disabled =
+      state.wave[0].played || canRestart || state.wins === OPPONENT_HEROS;
+    // cardholder1.src = state.wave[0].img;
     cardholder1.innerHTML = `
-      <button class="card"
-         ${state.wave[0].played && "disabled"}
-         data-button-type=${state.wave[0].suite}
-         data-value=${state.wave[0].value}
-         data-suite=${state.wave[0].suite}
-         data-rank=${state.wave[0].rank}
-      >
-        <img
-          src=${state.wave[0].img}
-          width="242px"
-          height="320px"
-        />
-      </button>`;
+      <img
+        class="card"
+        src=${state.wave[0].img}
+        width="242px"
+        height="320px"
+      />`;
+    slot1.blur();
   }
 
   if (!equals(state?.previousState?.wave[1], state.wave[1])) {
+    slot2.dataset.buttonType = state.wave[1].suite;
+    slot2.dataset.value = state.wave[1].value;
+    slot2.dataset.suite = state.wave[1].suite;
+    slot2.dataset.rank = state.wave[1].rank;
+    slot2.disabled =
+      state.wave[1].played || canRestart || state.wins === OPPONENT_HEROS;
+    // cardholder2.src = state.wave[1].img;
     cardholder2.innerHTML = `
-      <button class="card"
-         ${state.wave[1].played && "disabled"}
-         data-button-type=${state.wave[1].suite}
-         data-value=${state.wave[1].value}
-         data-suite=${state.wave[1].suite}
-         data-rank=${state.wave[1].rank}
-      >
-        <img
-          src=${state.wave[1].img}
-          width="242px"
-          height="320px"
-        />
-      </button>`;
+      <img
+        class="card"
+        src=${state.wave[1].img}
+        width="242px"
+        height="320px"
+      />`;
+    slot2.blur();
   }
 
   if (!equals(state?.previousState?.wave[2], state.wave[2])) {
+    slot3.dataset.buttonType = state.wave[2].suite;
+    slot3.dataset.value = state.wave[2].value;
+    slot3.dataset.suite = state.wave[2].suite;
+    slot3.dataset.rank = state.wave[2].rank;
+    slot3.disabled =
+      state.wave[2].played || canRestart || state.wins === OPPONENT_HEROS;
+    slot3.blur();
+    // slot1.children[0].src = state.wave[0].img;
     cardholder3.innerHTML = `
-      <button class="card"
-         ${state.wave[2].played && "disabled"}
-         data-button-type=${state.wave[2].suite}
-         data-value=${state.wave[2].value}
-         data-suite=${state.wave[2].suite}
-         data-rank=${state.wave[2].rank}
-      >
-        <img
-          src=${state.wave[2].img}
-          width="242px"
-          height="320px"
-        />
-      </button>`;
+      <img
+        class="card"
+        src=${state.wave[2].img}
+        width="242px"
+        height="320px"
+      />`;
+    slot3.blur();
   }
 
   if (!equals(state?.previousState?.wave[3], state.wave[3])) {
+    slot4.dataset.buttonType = state.wave[3].suite;
+    slot4.dataset.value = state.wave[3].value;
+    slot4.dataset.suite = state.wave[3].suite;
+    slot4.dataset.rank = state.wave[3].rank;
+    slot4.disabled =
+      state.wave[3].played || canRestart || state.wins === OPPONENT_HEROS;
+    slot4.blur();
+    // slot1.children[0].src = state.wave[0].img;
     cardholder4.innerHTML = `
-      <button class="card"
-         ${state.wave[3].played && "disabled"}
-         data-button-type=${state.wave[3].suite}
-         data-value=${state.wave[3].value}
-         data-suite=${state.wave[3].suite}
-         data-rank=${state.wave[3].rank}
-      >
-        <img
-          src=${state.wave[3].img}
-          width="242px"
-          height="320px"
-        />
-      </button>`;
+      <img
+        class="card"
+        src=${state.wave[3].img}
+        width="242px"
+        height="320px"
+      />`;
+    slot4.blur();
   }
+
+  // if (!equals(state?.previousState?.wave[1], state.wave[1])) {
+  //   cardholder2.innerHTML = `
+  //     <button class="card"
+  //        ${state.wave[1].played && "disabled"}
+  //        data-button-type=${state.wave[1].suite}
+  //        data-value=${state.wave[1].value}
+  //        data-suite=${state.wave[1].suite}
+  //        data-rank=${state.wave[1].rank}
+  //     >
+  //       <img
+  //         src=${state.wave[1].img}
+  //         width="242px"
+  //         height="320px"
+  //       />
+  //     </button>`;
+  // }
+
+  // if (!equals(state?.previousState?.wave[2], state.wave[2])) {
+  //   cardholder3.innerHTML = `
+  //     <button class="card"
+  //        ${state.wave[2].played && "disabled"}
+  //        data-button-type=${state.wave[2].suite}
+  //        data-value=${state.wave[2].value}
+  //        data-suite=${state.wave[2].suite}
+  //        data-rank=${state.wave[2].rank}
+  //     >
+  //       <img
+  //         src=${state.wave[2].img}
+  //         width="242px"
+  //         height="320px"
+  //       />
+  //     </button>`;
+  // }
+
+  // if (!equals(state?.previousState?.wave[3], state.wave[3])) {
+  //   cardholder4.innerHTML = `
+  //     <button class="card"
+  //        ${state.wave[3].played && "disabled"}
+  //        data-button-type=${state.wave[3].suite}
+  //        data-value=${state.wave[3].value}
+  //        data-suite=${state.wave[3].suite}
+  //        data-rank=${state.wave[3].rank}
+  //     >
+  //       <img
+  //         src=${state.wave[3].img}
+  //         width="242px"
+  //         height="320px"
+  //       />
+  //     </button>`;
+  // }
 
   if (canEvade || canRestart) {
     actionButton.classList.remove("disabled");
